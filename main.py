@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from random import randint
 from ics import Calendar as ICSCalendar
 from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
@@ -23,10 +22,15 @@ def import_ics(calendar_id: str = None, ics_path: str = "Plany.ics", open_browse
     if calendar_id:
         gc = GoogleCalendar(calendar_id)
     else:
-        calendar_name = f"Study_{datetime.now():%d%m%Y}_{randint(0, 1000)}"
         gc = GoogleCalendar(open_browser=open_browser)
-        calendar_id = gc.add_calendar(GCSACalendar(calendar_name)).calendar_id
-        print(f"Created new calendar: {calendar_name}\nCalendar ID: {calendar_id}")
+        for calendar in GoogleCalendar().get_calendar_list():
+            if calendar.summary == "Study":
+                gc.delete_calendar(calendar.id)
+                print(f"Deleted old calendar: {calendar.id}")
+
+        calendar_id = gc.add_calendar(GCSACalendar("Study")).calendar_id
+        print(f"Created new calendar: {calendar_id}")
+        gc = GoogleCalendar(calendar_id, open_browser=open_browser)
 
     # Set timezone based on the calendar settings
     tz = timezone(gc.get_settings().timezone)
