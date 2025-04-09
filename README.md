@@ -1,6 +1,14 @@
 
 # **ICS Importer for Google Calendar** 📅✨
 
+<p align="center">
+  <a href="docs/pl.md"><img src="docs/pl_icon.svg" width="70"></a>
+  <a>&#8192;&#8192;</a>
+  <a href="README.md"><img src="docs/en_icon.svg" width="70"></a>
+  <a>&#8192;&#8192;</a>
+  <a href="docs/ua.md"><img src="docs/ua_icon.svg" width="70"></a>
+</p>
+
 **Welcome to the ICS Importer!** **This Python script is designed to import events from an** **ICS** **file into your** **Google Calendar**. **It’s specifically tailored for importing schedules from** [**Uniwersytet Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **You can get the ICS file from** **[this link](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **If you don't already have a calendar, the script will create a new one for you. It also cleans up old events (older than 30 days) before importing new ones.**
 
 ![ICS Importer Screenshot](docs/shot.png)
