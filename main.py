@@ -25,9 +25,8 @@ for e in gc.get_events(time_min=cutoff):
 with open("Plany.ics", encoding="utf-8") as f:
     events = Calendar(f.read()).events
 
-trash_pattern = re.compile(
-    r"^(Data zajęć:|Czas od:|Czas do:|Przedmiot|Forma zajęć:|Grupy:|Forma zaliczenia:|Uwagi:\s*$|Sala:\s*$)"
-)
+# Match only lines we want to keep
+keep_pattern = re.compile(r"^(Sala|Uwagi|Prowadzący):\s*\S+")
 
 for e in events:
     desc = e.description or ""
@@ -42,7 +41,7 @@ for e in events:
         color_id = COLOR["Purple"]
     elif "Grupy: Wyk" in desc:
         color_id = COLOR["Grey"]
-    elif "Grupy: Cw" in desc:
+    elif any(k in desc for k in ["Grupy: Cw", "Grupy: Lek"]):
         color_id = COLOR["Green"]
     elif "Grupy: Lab" in desc:
         color_id = COLOR["Blue"]
@@ -63,8 +62,7 @@ for e in events:
 
     desc_lines = desc.splitlines()
     desc = "\n".join(
-        line for line in desc_lines
-        if not trash_pattern.match(line.strip())
+        line for line in desc_lines if keep_pattern.match(line.strip())
     ).strip()
 
     gc.add_event(
