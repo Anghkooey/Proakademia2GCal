@@ -4,7 +4,7 @@ from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
 from config import calendar_id
 from pytz import timezone
-from re import search as re_search
+import re
 
 COLOR = {
     "Red": "11",
@@ -24,6 +24,10 @@ for e in gc.get_events(time_min=cutoff):
 
 with open("Plany.ics", encoding="utf-8") as f:
     events = Calendar(f.read()).events
+
+trash_pattern = re.compile(
+    r"^(Data zajęć:|Czas od:|Czas do:|Przedmiot|Forma zajęć:|Grupy:|Forma zaliczenia:|Uwagi:\s*$|Sala:\s*$)"
+)
 
 for e in events:
     desc = e.description or ""
@@ -46,7 +50,7 @@ for e in events:
         # Unknown event
         color_id = COLOR["Yellow"]
 
-    sala_match = re_search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
+    sala_match = re.search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
     location = ""
     if sala_match:
         sala_letter, sala_number = sala_match.groups()
@@ -56,6 +60,12 @@ for e in events:
 
     start = tz.localize(e.begin.datetime.replace(tzinfo=None))
     end = tz.localize(e.end.datetime.replace(tzinfo=None))
+
+    desc_lines = desc.splitlines()
+    desc = "\n".join(
+        line for line in desc_lines
+        if not trash_pattern.match(line.strip())
+    ).strip()
 
     gc.add_event(
         Event(summary=summary, start=start, end=end, description=desc, color_id=color_id)
