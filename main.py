@@ -4,6 +4,7 @@ from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
 from config import calendar_id
 from pytz import timezone
+from re import search as re_search
 
 COLOR = {
     "Red": "11",
@@ -42,12 +43,20 @@ for e in events:
     elif "Grupy: Lab" in desc:
         color_id = COLOR["Blue"]
     else:
-        # Unknown
+        # Unknown event
         color_id = COLOR["Yellow"]
+
+    sala_match = re_search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
+    location = ""
+    if sala_match:
+        sala_letter, sala_number = sala_match.groups()
+        location = f" {sala_letter} {sala_number}"
+
+    summary = f"{location} {e.name}"
 
     start = tz.localize(e.begin.datetime.replace(tzinfo=None))
     end = tz.localize(e.end.datetime.replace(tzinfo=None))
 
     gc.add_event(
-        Event(summary=e.name, start=start, end=end, description=desc, color_id=color_id)
+        Event(summary=summary, start=start, end=end, description=desc, color_id=color_id)
     )
