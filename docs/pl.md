@@ -12,6 +12,17 @@
 
 ![ICS Importer Screenshot](shot.png)
 
+**Legenda kolorów (typy zajęć):**
+
+- 🟥 **Tomato** – Egzamin  
+- 🟪 **Grape** – Zajęcia online lub odwołane  
+- ⬜ **Graphite** – Wykład  
+- 🟩 **Basil** – Ćwiczenia / Seminarium  
+- 🟦 **Peacock** – Laboratorium  
+- 🟨 **Banana** – Inne / Nieznane  
+
+**Możesz zmienić kolory, edytując słownik `COLORS` oraz odpowiadające warunki w kodzie.**
+
 ## **Instalacja** 🛠️
 
 **Przed uruchomieniem skryptu upewnij się, że masz zainstalowane następujące zależności:**

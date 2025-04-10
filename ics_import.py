@@ -36,13 +36,19 @@ def ics_import(calendar_id: str = None, ics_path: str = "Plany.ics", open_browse
     
     The function will print the ID of the created calendar or the ID of the existing calendar being used.
     """
-    COLOR = {
-        "Red": "11",
-        "Purple": "3",
-        "Grey": "8",
-        "Green": "10",
-        "Blue": "7",
-        "Yellow": "5",
+
+    COLORS = {
+        "Lavender": "1",     # Light Purple
+        "Sage": "2",         # Light Green
+        "Grape": "3",        # Purple
+        "Flamingo": "4",     # Coral
+        "Banana": "5",       # Yellow
+        "Tangerine": "6",    # Orange
+        "Peacock": "7",      # Light Blue
+        "Graphite": "8",     # Grey
+        "Blueberry": "9",    # Blue
+        "Basil": "10",       # Green
+        "Tomato": "11",      # Red
     }
 
     keep_pattern = re.compile(r"^(Sala|Uwagi|Prowadzący):\s*\S+")
@@ -94,17 +100,20 @@ def ics_import(calendar_id: str = None, ics_path: str = "Plany.ics", open_browse
 
         # Determine color based on description content
         if "Uwagi: \n" not in desc:
-            color_id = COLOR["Red"]
+            # Exam
+            color_id = COLORS["Tomato"]
         elif "Sala: \n" in desc:
-            color_id = COLOR["Purple"]
+            # Online or cancelled
+            color_id = COLORS["Grape"]
         elif "Grupy: Wyk" in desc:
-            color_id = COLOR["Grey"]
+            color_id = COLORS["Graphite"]
         elif any(k in desc for k in ["Grupy: Cw", "Grupy: Lek"]):
-            color_id = COLOR["Green"]
+            color_id = COLORS["Basil"]
         elif "Grupy: Lab" in desc:
-            color_id = COLOR["Blue"]
+            color_id = COLORS["Peacock"]
         else:
-            color_id = COLOR["Yellow"]
+            # Unknown
+            color_id = COLORS["Banana"]
 
         # Extract location (Sala)
         sala_match = re.search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
