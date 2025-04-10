@@ -10,21 +10,22 @@ import os
 
 # Color mapping for calendar events based on descriptions
 COLORS = {
-    "Lavender": "1",     # Light Purple
-    "Sage": "2",         # Light Green
-    "Grape": "3",        # Purple
-    "Flamingo": "4",     # Coral
-    "Banana": "5",       # Yellow
-    "Tangerine": "6",    # Orange
-    "Peacock": "7",      # Light Blue
-    "Graphite": "8",     # Grey
-    "Blueberry": "9",    # Blue
-    "Basil": "10",       # Green
-    "Tomato": "11",      # Red
+    "Lavender": "1",  # Light Purple
+    "Sage": "2",  # Light Green
+    "Grape": "3",  # Purple
+    "Flamingo": "4",  # Coral
+    "Banana": "5",  # Yellow
+    "Tangerine": "6",  # Orange
+    "Peacock": "7",  # Light Blue
+    "Graphite": "8",  # Grey
+    "Blueberry": "9",  # Blue
+    "Basil": "10",  # Green
+    "Tomato": "11",  # Red
 }
 
 # Regex pattern to extract certain lines from descriptions (Sala, Uwagi, Prowadzący)
 KEEP_PATTERN = re.compile(r"^(Sala|Uwagi|Prowadzący):\s*\S+")
+
 
 def determine_color(desc: str) -> str:
     """
@@ -35,7 +36,7 @@ def determine_color(desc: str) -> str:
 
     Returns:
     - str: Color ID corresponding to the event type.
-    
+
     Algorithm:
     1. Exam events (without "Uwagi") are assigned a red color.
     2. Online/cancelled events (with "Sala") are assigned a purple color.
@@ -54,6 +55,7 @@ def determine_color(desc: str) -> str:
         return COLORS["Peacock"]
     return COLORS["Banana"]  # Default
 
+
 def extract_location(desc: str) -> str:
     """
     Extracts the location (Sala) information from the event description.
@@ -63,13 +65,14 @@ def extract_location(desc: str) -> str:
 
     Returns:
     - str: Extracted location (if any), otherwise an empty string.
-    
+
     Algorithm:
     1. Uses regex to match the "Sala" and room number in the description.
     2. Returns the formatted location string (e.g., "A 101").
     """
     match = re.search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
     return f"{match.group(1)} {match.group(2)}" if match else ""
+
 
 def clean_description(desc: str) -> str:
     """
@@ -80,7 +83,7 @@ def clean_description(desc: str) -> str:
 
     Returns:
     - str: Cleaned description containing only relevant lines.
-    
+
     Algorithm:
     1. Splits the description into lines.
     2. Filters lines matching the KEEP_PATTERN regex.
@@ -89,6 +92,7 @@ def clean_description(desc: str) -> str:
     return "\n".join(
         line for line in desc.splitlines() if KEEP_PATTERN.match(line.strip())
     ).strip()
+
 
 def load_ics_events(path: str) -> List:
     """
@@ -99,7 +103,7 @@ def load_ics_events(path: str) -> List:
 
     Returns:
     - List: List of events parsed from the ICS file.
-    
+
     Algorithm:
     1. Opens the ICS file and parses its content.
     2. Extracts and returns all events from the ICS calendar.
@@ -107,7 +111,12 @@ def load_ics_events(path: str) -> List:
     with open(path, encoding="utf-8") as f:
         return list(ICSCalendar(f.read()).events)
 
-def ics_import(calendar_id: Optional[str] = None, ics_path: str = "Plany.ics", open_browser: bool = True):
+
+def ics_import(
+    calendar_id: Optional[str] = None,
+    ics_path: str = "Plany.ics",
+    open_browser: bool = True,
+):
     """
     Imports events from an ICS file into a Google Calendar, either creating a new calendar or updating an existing one.
 
@@ -132,7 +141,7 @@ def ics_import(calendar_id: Optional[str] = None, ics_path: str = "Plany.ics", o
             confirmation = input(
                 "You are about to use your primary calendar. All existing events will be deleted. Proceed? (yes/no): "
             )
-            if confirmation.lower() != 'yes':
+            if confirmation.lower() != "yes":
                 print("Operation aborted.")
                 exit()
         gc = GoogleCalendar(calendar_id)
@@ -164,10 +173,22 @@ def ics_import(calendar_id: Optional[str] = None, ics_path: str = "Plany.ics", o
         start = tz.localize(e.begin.datetime.replace(tzinfo=None))
         end = tz.localize(e.end.datetime.replace(tzinfo=None))
 
-        gc.add_event(Event(summary=summary, start=start, end=end, description=cleaned_desc, color_id=determine_color(desc)))
+        gc.add_event(
+            Event(
+                summary=summary,
+                start=start,
+                end=end,
+                description=cleaned_desc,
+                color_id=determine_color(desc),
+            )
+        )
 
 
-def ics_edit(input_path: str = "Plany.ics", output_path: str = "Plany_edited.ics", timezone_str: str = "Europe/Warsaw"):
+def ics_edit(
+    input_path: str = "Plany.ics",
+    output_path: str = "Plany_edited.ics",
+    timezone_str: str = "Europe/Warsaw",
+):
     """
     Edits the events in an ICS file by extracting relevant details and adjusting the time zone.
 
@@ -189,7 +210,8 @@ def ics_edit(input_path: str = "Plany.ics", output_path: str = "Plany_edited.ics
     tz = timezone(timezone_str)
 
     for e in events:
-        if "odwołane" in (e.description or ""): continue
+        if "odwołane" in (e.description or ""):
+            continue
         location = extract_location(e.description)
         new_summary = f"{location} {e.name}".strip()
         cleaned_desc = clean_description(e.description)
@@ -204,7 +226,7 @@ def ics_edit(input_path: str = "Plany.ics", output_path: str = "Plany_edited.ics
             begin=start,
             end=end,
             description=cleaned_desc,
-            location=location or None
+            location=location or None,
         )
         new_cal.events.add(new_event)
 
@@ -216,4 +238,3 @@ def ics_edit(input_path: str = "Plany.ics", output_path: str = "Plany_edited.ics
     # Write the updated calendar to the output file
     with open(output_path, "w", encoding="utf-8") as f:
         f.writelines(new_cal.serialize_iter())
-

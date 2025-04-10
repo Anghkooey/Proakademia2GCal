@@ -1,27 +1,27 @@
-# **ICS Importer for Google Calendar** 📅✨
+# **Importer ICS do Google Calendar** 📅✨
 
 <p align="center">
   <a href="pl.md"><img src="pl_icon.svg" width="70"></a>
-  <a>&#8192;&#8192;</a>
+  <a>  </a>
   <a href="/README.md"><img src="en_icon.svg" width="70"></a>
-  <a>&#8192;&#8192;</a>
+  <a>  </a>
   <a href="ua.md"><img src="ua_icon.svg" width="70"></a>
 </p>
 
-**Witamy w ICS Importer!** **Ten skrypt Pythona jest zaprojektowany do importowania wydarzeń z pliku** **ICS** **do Twojego** **Google Calendar**. **Jest on specjalnie dopasowany do importowania harmonogramów z** [**Uniwersytetu Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **Plik ICS możesz pobrać** **[tutaj](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **Jeśli nie masz jeszcze kalendarza, skrypt utworzy nowy. Dodatkowo, przed zaimportowaniem nowych wydarzeń, usunie stare (starsze niż 30 dni).**
+**Witamy w ICS Importer!** **Ten skrypt w Pythonie jest zaprojektowany do importowania wydarzeń z pliku** **ICS** **do Twojego** **Google Calendar**. **Jest szczególnie dostosowany do importowania harmonogramów z** [**Uniwersytetu Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **Plik ICS możesz pobrać z** **[tego linku](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **Jeśli nie masz jeszcze kalendarza, skrypt utworzy nowy. Ponadto, przed importem nowych wydarzeń, usunie stare (starsze niż 30 dni).**
 
 ![ICS Importer Screenshot](shot.png)
 
-**Legenda kolorów (typy zajęć):**
+**Legenda kolorów (rodzaje wydarzeń):**
 
-- 🟥 **Tomato** – Egzamin  
-- 🟪 **Grape** – Zajęcia online lub odwołane  
-- ⬜ **Graphite** – Wykład  
-- 🟩 **Basil** – Ćwiczenia / Seminarium  
-- 🟦 **Peacock** – Laboratorium  
-- 🟨 **Banana** – Inne / Nieznane  
+- 🟥 **Tomato** – Egzamin
+- 🟪 **Grape** – Zajęcia online lub odwołane
+- ⬜ **Graphite** – Wykład
+- 🟩 **Basil** – Ćwiczenia / Seminarium
+- 🟦 **Peacock** – Laboratorium
+- 🟨 **Banana** – Inne / Nieznane
 
-**Możesz zmienić kolory, edytując słownik `COLORS` oraz odpowiadające warunki w kodzie.**
+**Możesz zmienić kolory, edytując słownik `COLORS` i powiązane warunki w kodzie.**
 
 ## **Instalacja** 🛠️
 
@@ -31,35 +31,32 @@
 pip install gcsa ics pytz
 ```
 
-## **Konfiguracja Google API Credentials** 🔑
+## **Konfiguracja poświadczeń Google API** 🔑
 
-**Aby interagować z Twoim Google Calendar, musisz skonfigurować swoje dane uwierzytelniające API.**
+**Aby uzyskać dostęp do swojego Google Calendar, musisz skonfigurować poświadczenia API.**
 
-### **Kroki, aby uzyskać dane uwierzytelniające Google API:**
+### **Kroki, aby uzyskać poświadczenia Google API:**
 
-1. **Utwórz nowy projekt w Google Cloud Platform (GCP)**  
-   [Postępuj zgodnie z tym przewodnikiem, aby utworzyć projekt](https://developers.google.com/workspace/guides/create-project).  
-   - **Ważne**: **Włącz** **Google Calendar API** **dla swojego projektu.**
+1. **Utwórz nowy projekt na Google Cloud Platform (GCP)** [Postępuj zgodnie z tym przewodnikiem, aby utworzyć projekt](https://developers.google.com/workspace/guides/create-project).
 
-2. **Skonfiguruj ekran zgody OAuth**  
+   - **Ważne**: **Włącz API Google Calendar** **dla swojego projektu.**
+2. **Skonfiguruj ekran zgody OAuth**
    [Postępuj zgodnie z tym przewodnikiem, aby skonfigurować ekran zgody OAuth](https://developers.google.com/workspace/guides/configure-oauth-consent).
-
-3. **Utwórz dane uwierzytelniające OAuth client ID**  
-   [Utwórz dane uwierzytelniające OAuth i pobierz plik `credentials.json`](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id).
-
-4. **Zapisz dane uwierzytelniające**  
+3. **Utwórz poświadczenia OAuth Client ID**
+   [Utwórz poświadczenia OAuth i pobierz plik `credentials.json`](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id).
+4. **Przechowaj poświadczenia**
    **Umieść pobrany plik** `credentials.json` **(client_secret_*.json) w katalogu** `~/.credentials/`.
 
-> **Uwaga**: **Możesz znaleźć** [**ten przewodnik szybkiego startu**](https://developers.google.com/workspace/calendar/api/quickstart/python) **pomocnym przy konfiguracji danych uwierzytelniających API Google Calendar.**
+> **Uwaga**: **Możesz znaleźć** [**ten przewodnik szybko uruchamiający**](https://developers.google.com/workspace/calendar/api/quickstart/python) **pomocnym przy konfiguracji poświadczeń API Google Calendar.**
 
 ## **Użycie** 🎉
 
-### **Przykład 1: Importowanie wydarzeń do określonego kalendarza** 🗓️
+### **Przykład 1: Importuj wydarzenia do określonego kalendarza** 🗓️
 
-**Jeśli masz już kalendarz:**
+**Jeśli już masz kalendarz:**
 
 ```python
-from ics_import import ics_import
+from main import ics_import
 from config import calendar_id
 
 ics_import(calendar_id)
@@ -70,28 +67,40 @@ ics_import(calendar_id)
 **Jeśli kalendarz nie jest podany, zostanie utworzony nowy:**
 
 ```python
-from ics_import import ics_import
+from main import ics_import
 
 ics_import()
 ```
 
+### **Przykład 3: Edytuj plik ICS (Dostosowanie strefy czasowej)** 🕰️
+
+Jeśli potrzebujesz dostosować strefę czasową wydarzeń w swoim pliku ICS przed importem, użyj funkcji `ics_edit`:
+
+```python
+from main import ics_edit
+
+ics_edit(input_path="Plany.ics", output_path="Plany_edited.ics", timezone_str="Europe/Warsaw")
+```
+
+Ta funkcja umożliwia oczyszczenie i dostosowanie godzin rozpoczęcia i zakończenia wydarzeń zgodnie z wybraną strefą czasową.
+
 ## **Jak to działa** ⚙️
 
-- **Tworzenie lub używanie Google Calendar**: **Jeśli nie podano** `calendar_id`, **zostanie utworzony nowy kalendarz o nazwie "Study".**
-- **Obsługa strefy czasowej**: **Skrypt używa strefy czasowej Twojego kalendarza dla godzin wydarzeń.**
+- **Utworzenie lub użycie kalendarza Google**: **Jeśli nie podano** `calendar_id` **utworzony zostaje nowy kalendarz o nazwie "Study".**
+- **Obsługa strefy czasowej**: **Skrypt używa strefy czasowej Twojego kalendarza do ustalania godzin wydarzeń.**
 - **Czyszczenie wydarzeń**: **Wydarzenia starsze niż 30 dni są usuwane przed dodaniem nowych.**
-- **Kolorowanie wydarzeń**: **Wydarzeniom przypisane są kolory na podstawie ich typu** (np. **Egzamin**, **Online**, **Praca grupowa**).
+- **Kodowanie kolorów**: **Kolory wydarzeń są przypisywane w zależności od typu wydarzenia** (np. **Egzamin**, **Online**, **Ćwiczenia**).
 
 ## **Dostosowanie** 🎨
 
-- **Ścieżka pliku ICS**: **Zmień parametr** `ics_path` **aby używać innego pliku ICS.**
-- **Uwierzytelnianie**: **Pomiń uwierzytelnianie przeglądarką ustawiając** `open_browser=False` **jeśli już przeprowadziłeś uwierzytelnienie.**
+- **Ścieżka pliku ICS**: **Zmień parametr** `ics_path`, **aby używać innego pliku ICS.**
+- **Autoryzacja**: **Pomiń autoryzację przez przeglądarkę, ustawiając** `open_browser=False` **jeśli już uwierzytelniono konto.**
 
 ## **Dokumentacja gcsa** 📚
 
-**Pełną dokumentację biblioteki** `gcsa` **(która wchodzi w interakcję z API Google Calendar), znajdziesz tutaj:**  
+**Pełna dokumentacja biblioteki** `gcsa` **(która współpracuje z Google Calendar API) jest dostępna pod adresem:**
 [**Dokumentacja gcsa**](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)
 
 ## **Licencja** 📜
 
-**Licencjonowane na warunkach GNU General Public License v3** - szczegóły znajdują się w pliku [**LICENSE**](/LICENSE).
+**Licencjonowane na warunkach GNU General Public License v3** - zobacz plik [**LICENSE**](/LICENSE) po szczegóły.

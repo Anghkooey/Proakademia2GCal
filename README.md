@@ -56,7 +56,7 @@ pip install gcsa ics pytz
 **If you already have a calendar:**
 
 ```python
-from ics_import import ics_import
+from main import ics_import
 from config import calendar_id
 
 ics_import(calendar_id)
@@ -67,10 +67,22 @@ ics_import(calendar_id)
 **If no calendar is provided, a new one will be created:**
 
 ```python
-from ics_import import ics_import
+from main import ics_import
 
 ics_import()
 ```
+
+### **Example 3: Edit ICS File (Adjust Time Zone)** 🕰️
+
+If you need to adjust the time zone of the events in your ICS file before importing, use the `ics_edit` function:
+
+```python
+from main import ics_edit
+
+ics_edit()
+```
+
+This function allows you to clean up and adjust the start and end times of the events according to your desired time zone.
 
 ## **How It Works** ⚙️
 
