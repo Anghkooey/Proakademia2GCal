@@ -10,7 +10,21 @@
 
 **Ласкаво просимо до ICS Importer!** **Цей Python-скрипт створений для імпорту подій з файлу** **ICS** **до вашого** **Google Calendar**. **Він спеціально налаштований для імпорту розкладів з** [**Університету Анджея Фриця Моджевського**](https://uafm.edu.pl/). **Файл ICS можна завантажити за** **[цим посиланням](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **Якщо у вас ще немає календаря, скрипт створить новий. Також перед імпортом нових подій старі (старші за 30 днів) будуть видалені.**
 
-![ICS Importer Screenshot](shot.png)
+<div align="center">
+  <h3><strong>Повноекранний вигляд</strong></h3>
+</div>
+
+|         **До**         |        **Після**         |
+| :--------------------: | :----------------------: |
+| ![До](shot_before.png) | ![Після](shot_after.png) |
+
+<div align="center">
+  <h3><strong>Вигляд на комп’ютері</strong></h3>
+</div>
+
+|                      **До**                       |                      **Після**                      |
+| :-----------------------------------------------: | :-------------------------------------------------: |
+| <img src="desk_before.png" alt="До" width="400"/> | <img src="desk_after.png" alt="Після" width="560"/> |
 
 **Легенда кольорів (типи подій):**
 
@@ -40,12 +54,13 @@ pip install gcsa ics pytz
 1. **Створіть новий проект на Google Cloud Platform (GCP)** [Дотримуйтесь цього посібника, щоб створити проект](https://developers.google.com/workspace/guides/create-project).
 
    - **Важливо**: **Увімкніть API Google Calendar** **для вашого проекту.**
+
 2. **Налаштуйте екран згоди OAuth**
    [Дотримуйтесь цього посібника, щоб налаштувати екран згоди OAuth](https://developers.google.com/workspace/guides/configure-oauth-consent).
 3. **Створіть поєднання OAuth Client ID**
    [Створіть поєднання OAuth та завантажте файл `credentials.json`](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id).
 4. **Збережіть поєднання**
-   **Помістіть завантажений файл** `credentials.json` **(client_secret_*.json) в директорію** `~/.credentials/`.
+   **Помістіть завантажений файл** `credentials.json` **(client*secret*\*.json) в директорію** `~/.credentials/`.
 
 > **Примітка**: **Ви можете знайти** [**цей посібник швидкого старту**](https://developers.google.com/workspace/calendar/api/quickstart/python) **корисним для налаштування поєднань API Google Calendar.**
 

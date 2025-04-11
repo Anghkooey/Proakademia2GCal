@@ -10,7 +10,21 @@
 
 **Welcome to the ICS Importer!** **This Python script is designed to import events from an** **ICS** **file into your** **Google Calendar**. **It’s specifically tailored for importing schedules from** [**Uniwersytet Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **You can get the ICS file from** **[this link](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **If you don't already have a calendar, the script will create a new one for you. It also cleans up old events (older than 30 days) before importing new ones.**
 
-![ICS Importer Screenshot](docs/shot.png)
+<div align="center">
+  <h3><strong>Full-size View</strong></h3>
+</div>
+
+|           **Before**            |           **After**           |
+| :-----------------------------: | :---------------------------: |
+| ![Before](docs/shot_before.png) | ![After](docs/shot_after.png) |
+
+<div align="center">
+  <h3><strong>Desktop View</strong></h3>
+</div>
+
+|                         **Before**                         |                        **After**                         |
+| :--------------------------------------------------------: | :------------------------------------------------------: |
+| <img src="docs/desk_before.png" alt="Before" width="400"/> | <img src="docs/desk_after.png" alt="After" width="560"/> |
 
 **Color legend (event types):**
 
@@ -40,12 +54,13 @@ pip install gcsa ics pytz
 1. **Create a new Google Cloud Platform (GCP) project**[Follow this guide to create a project](https://developers.google.com/workspace/guides/create-project).
 
    - **Important**: **Enable the** **Google Calendar API** **for your project.**
+
 2. **Configure the OAuth consent screen**
    [Follow this guide for configuring the OAuth consent screen](https://developers.google.com/workspace/guides/configure-oauth-consent).
 3. **Create an OAuth client ID credential**
    [Create OAuth credentials and download the `credentials.json`](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id).
 4. **Store the credentials**
-   **Place the downloaded** `credentials.json` **file (client_secret_*.json) into the** `~/.credentials/` **directory.**
+   **Place the downloaded** `credentials.json` **file (client*secret*\*.json) into the** `~/.credentials/` **directory.**
 
 > **Note**: **You may find** [**this quickstart guide**](https://developers.google.com/workspace/calendar/api/quickstart/python) **helpful for setting up Google Calendar API credentials.**
 

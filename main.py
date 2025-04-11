@@ -24,7 +24,7 @@ COLORS = {
 }
 
 # Regex pattern to extract certain lines from descriptions (Sala, Uwagi, Prowadzący)
-KEEP_PATTERN = re.compile(r"^(Sala|Uwagi|Prowadzący):\s*\S+")
+KEEP_PATTERN = re.compile(r"^(Sala|Uwagi|Prowadzący|Grupy):\s*\S+")
 
 
 def determine_color(desc: str) -> str:
