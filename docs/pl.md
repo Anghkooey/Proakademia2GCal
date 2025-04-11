@@ -94,7 +94,7 @@ Jeśli potrzebujesz dostosować strefę czasową wydarzeń w swoim pliku ICS prz
 ```python
 from main import ics_edit
 
-ics_edit(input_path="Plany.ics", output_path="Plany_edited.ics", timezone_str="Europe/Warsaw")
+ics_edit()
 ```
 
 Ta funkcja umożliwia oczyszczenie i dostosowanie godzin rozpoczęcia i zakończenia wydarzeń zgodnie z wybraną strefą czasową.

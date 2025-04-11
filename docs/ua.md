@@ -94,7 +94,7 @@ ics_import()
 ```python
 from main import ics_edit
 
-ics_edit(input_path="Plany.ics", output_path="Plany_edited.ics", timezone_str="Europe/Kiev")
+ics_edit()
 ```
 
 Ця функція дозволяє очистити та налаштувати години початку та закінчення подій відповідно до вибраної часової зони.
