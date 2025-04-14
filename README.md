@@ -11,20 +11,20 @@
 **Welcome to the ICS Importer!** **This Python script is designed to import events from an** **ICS** **file into your** **Google Calendar**. **It’s specifically tailored for importing schedules from** [**Uniwersytet Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **You can get the ICS file from** **[this link](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **If you don't already have a calendar, the script will create a new one for you. It also cleans up old events (older than 30 days) before importing new ones.**
 
 <div align="center">
-  <h3><strong>Full-size View</strong></h3>
+  <h3><strong>Calendar View</strong></h3>
 </div>
 
-|           **Before**            |           **After**           |
-| :-----------------------------: | :---------------------------: |
-| ![Before](docs/shot_before.png) | ![After](docs/shot_after.png) |
+|             **Before**              |             **After**             |
+| :---------------------------------: | :-------------------------------: |
+| ![Before](docs/calendar_before.png) | ![After](docs/calendar_after.png) |
 
 <div align="center">
-  <h3><strong>Desktop View</strong></h3>
+  <h3><strong>Event Description View</strong></h3>
 </div>
 
-|                         **Before**                         |                        **After**                         |
-| :--------------------------------------------------------: | :------------------------------------------------------: |
-| <img src="docs/desk_before.png" alt="Before" width="400"/> | <img src="docs/desk_after.png" alt="After" width="560"/> |
+|                            **Before**                             |                            **After**                            |
+| :---------------------------------------------------------------: | :-------------------------------------------------------------: |
+| <img src="docs/description_before.png" alt="Before" width="400"/> | <img src="docs/description_after.png" alt="After" width="560"/> |
 
 **Color legend (event types):**
 

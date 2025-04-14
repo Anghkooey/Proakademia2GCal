@@ -11,20 +11,20 @@
 **Witamy w ICS Importer!** **Ten skrypt w Pythonie jest zaprojektowany do importowania wydarzeń z pliku** **ICS** **do Twojego** **Google Calendar**. **Jest szczególnie dostosowany do importowania harmonogramów z** [**Uniwersytetu Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **Plik ICS możesz pobrać z** **[tego linku](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **Jeśli nie masz jeszcze kalendarza, skrypt utworzy nowy. Ponadto, przed importem nowych wydarzeń, usunie stare (starsze niż 30 dni).**
 
 <div align="center">
-  <h3><strong>Widok pełnoekranowy</strong></h3>
+  <h3><strong>Widok kalendarza</strong></h3>
 </div>
 
-|         **Przed**         |        **Po**         |
-| :-----------------------: | :-------------------: |
-| ![Przed](shot_before.png) | ![Po](shot_after.png) |
+|           **Przed**           |          **Po**           |
+| :---------------------------: | :-----------------------: |
+| ![Przed](calendar_before.png) | ![Po](calendar_after.png) |
 
 <div align="center">
-  <h3><strong>Widok na komputerze</strong></h3>
+  <h3><strong>Widok opisu wydarzenia</strong></h3>
 </div>
 
-|                      **Przed**                       |                      **Po**                      |
-| :--------------------------------------------------: | :----------------------------------------------: |
-| <img src="desk_before.png" alt="Przed" width="400"/> | <img src="desk_after.png" alt="Po" width="560"/> |
+|                          **Przed**                          |                         **Po**                          |
+| :---------------------------------------------------------: | :-----------------------------------------------------: |
+| <img src="description_before.png" alt="Przed" width="400"/> | <img src="description_after.png" alt="Po" width="560"/> |
 
 **Legenda kolorów (rodzaje wydarzeń):**
 
