@@ -28,12 +28,12 @@
 
 **Color legend (event types):**
 
-- 🟥 **Tomato** – Exam
-- 🟪 **Grape** – Online or Cancelled
-- ⬜ **Graphite** – Lecture
-- 🟩 **Basil** – Class / Seminar
-- 🟦 **Peacock** – Laboratory
-- 🟨 **Banana** – Other / Unknown
+- ❤️ **Tomato** – Exam
+- 💜 **Grape** – Online or Cancelled
+- 🖤 **Graphite** – Lecture
+- 💚 **Basil** – Class / Seminar
+- 💙 **Peacock** – Laboratory
+- 💛 **Banana** – Other / Unknown
 
 **You can change colors by editing the `COLORS` dictionary and related conditions in the code.**
 

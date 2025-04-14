@@ -26,14 +26,14 @@
 | :---------------------------------------------------------: | :-----------------------------------------------------: |
 | <img src="description_before.png" alt="Przed" width="400"/> | <img src="description_after.png" alt="Po" width="560"/> |
 
-**Legenda kolorów (rodzaje wydarzeń):**
+**Legenda kolorów (typy zajęć):**
 
-- 🟥 **Tomato** – Egzamin
-- 🟪 **Grape** – Zajęcia online lub odwołane
-- ⬜ **Graphite** – Wykład
-- 🟩 **Basil** – Ćwiczenia / Seminarium
-- 🟦 **Peacock** – Laboratorium
-- 🟨 **Banana** – Inne / Nieznane
+- ❤️ **Pomidorowy** – Egzamin
+- 💜 **Winogronowy** – Zdalne lub odwołane
+- 🖤 **Grafitowy** – Wykład
+- 💚 **Bazyliowy** – Ćwiczenia / Seminarium
+- 💙 **Pawi** – Laboratorium
+- 💛 **Bananowy** – Inne / Nieznane
 
 **Możesz zmienić kolory, edytując słownik `COLORS` i powiązane warunki w kodzie.**
 
