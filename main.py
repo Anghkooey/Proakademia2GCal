@@ -43,13 +43,13 @@ def determine_color(desc: str) -> str:
     3. Events with specific group types (e.g., "Wyk", "Cw", "Lek", "Lab") are assigned corresponding colors.
     4. Default color is yellow if no specific type is detected.
     """
-    if "Uwagi: \n" not in desc:
+    if not any(k in desc for k in ("Uwagi: \n", "Uwagi:  obieralny")):
         return COLORS["Tomato"]  # Exam
     elif "Sala: \n" in desc:
         return COLORS["Grape"]  # Online or cancelled
     elif "Grupy: Wyk" in desc:
         return COLORS["Graphite"]
-    elif any(k in desc for k in ["Grupy: Cw", "Grupy: Lek"]):
+    elif any(k in desc for k in ("Grupy: Cw", "Grupy: Lek")):
         return COLORS["Basil"]
     elif "Grupy: Lab" in desc:
         return COLORS["Peacock"]
@@ -145,6 +145,10 @@ def ics_import(
                 print("Operation aborted.")
                 exit()
         gc = GoogleCalendar(calendar_id)
+        cutoff = datetime.now() - timedelta(days=30)
+
+        for e in gc.get_events(time_min=cutoff):
+            gc.delete_event(e.id)
     else:
         for calendar in gc.get_calendar_list():
             if calendar.summary == "Study":
@@ -156,10 +160,6 @@ def ics_import(
         print(f"Created new calendar: {calendar_id}")
 
     tz = timezone(gc.get_settings().timezone)
-    cutoff = datetime.now() - timedelta(days=30)
-
-    for e in gc.get_events(time_min=cutoff):
-        gc.delete_event(e.id)
 
     for e in load_ics_events(ics_path):
         desc = e.description or ""
@@ -226,7 +226,6 @@ def ics_edit(
             begin=start,
             end=end,
             description=cleaned_desc,
-            location=location or None,
         )
         new_cal.events.add(new_event)
 
