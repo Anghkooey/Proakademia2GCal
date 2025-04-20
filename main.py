@@ -43,9 +43,9 @@ def determine_color(desc: str) -> str:
     3. Events with specific group types (e.g., "Wyk", "Cw", "Lek", "Lab") are assigned corresponding colors.
     4. Default color is yellow if no specific type is detected.
     """
-    if not any(k in desc for k in ("Uwagi: \n", "Uwagi:  obieralny")):
+    if all(x not in desc for x in ("Uwagi: \n", "obieralny", "Online")):
         return COLORS["Tomato"]  # Exam
-    elif "Sala: \n" in desc:
+    elif any(x in desc for x in ("Sala: \n", "Online")):
         return COLORS["Grape"]  # Online or cancelled
     elif "Grupy: Wyk" in desc:
         return COLORS["Graphite"]
