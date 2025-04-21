@@ -1,12 +1,15 @@
+import os
+import re
 from datetime import datetime, timedelta
-from typing import Optional, List
-from ics import Calendar as ICSCalendar, Event as ICSEvent
+from typing import List, Optional
+
+from gcsa.calendar import Calendar as GCSACalendar
 from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
-from gcsa.calendar import Calendar as GCSACalendar
+from ics import Calendar as ICSCalendar
+from ics import Event as ICSEvent
 from pytz import timezone
-import re
-import os
+from tqdm import tqdm
 
 # Color mapping for calendar events based on descriptions
 COLORS = {
@@ -138,30 +141,30 @@ def ics_import(
 
     if calendar_id:
         if gc.get_calendar().id == gc.get_calendar(calendar_id).id:
-            confirmation = input(
-                "You are about to use your primary calendar. All existing events will be deleted. Proceed? (yes/no): "
-            )
+            confirmation = input("⚠️ You’re about to delete your primary calendar. Proceed? (yes/no): ")
             if confirmation.lower() != "yes":
-                print("Operation aborted.")
+                print("🚫 Operation aborted.")
                 exit()
         gc = GoogleCalendar(calendar_id)
-        cutoff = datetime.now() - timedelta(days=30)
 
-        for e in gc.get_events(time_min=cutoff):
+        events_to_delete = list(gc.get_events(time_min=(datetime.now() - timedelta(days=30))))
+        for e in tqdm(events_to_delete, total=len(events_to_delete), desc="🗑️ Deleting old events", ncols=80, colour="MAGENTA", leave=False):
             gc.delete_event(e.id)
+        print("✅ Completed: 🗑️  Delete old events")
     else:
         for calendar in gc.get_calendar_list():
             if calendar.summary == "Study":
                 gc.delete_calendar(calendar.id)
-                print(f"Deleted old calendar: {calendar.id}")
+                print(f"🗑️ Old calendar deleted: {calendar.id}")
 
         calendar_id = gc.add_calendar(GCSACalendar("Study")).calendar_id
         gc = GoogleCalendar(calendar_id, open_browser=open_browser)
-        print(f"Created new calendar: {calendar_id}")
+        print(f"✅ New calendar created: {calendar_id}")
 
     tz = timezone(gc.get_settings().timezone)
 
-    for e in load_ics_events(ics_path):
+    ics_events = list(load_ics_events(ics_path))
+    for e in tqdm(ics_events, total=len(ics_events), desc="📅 Importing new events", ncols=80, colour="CYAN", leave=False):
         desc = e.description or ""
         if "odwołane" in desc:
             continue
@@ -182,6 +185,7 @@ def ics_import(
                 color_id=determine_color(desc),
             )
         )
+    print("✅ Completed: 📅 Import new events")
 
 
 def ics_edit(
@@ -237,3 +241,4 @@ def ics_edit(
     # Write the updated calendar to the output file
     with open(output_path, "w", encoding="utf-8") as f:
         f.writelines(new_cal.serialize_iter())
+    print(f"✅ ICS editing completed successfully!\n📁 Output saved to: {output_path}")
