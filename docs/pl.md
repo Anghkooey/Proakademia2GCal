@@ -16,7 +16,7 @@
 
 |           **Przed**           |          **Po**           |
 | :---------------------------: | :-----------------------: |
-| ![Przed](calendar_before.png) | ![Po](calendar_after.png) |
+| ![Przed](preview/pictures/calendar_before.png) | ![Po](preview/pictures/calendar_after.png) |
 
 <div align="center">
   <h3><strong>Widok opisu wydarzenia</strong></h3>
@@ -24,7 +24,7 @@
 
 |                          **Przed**                          |                         **Po**                          |
 | :---------------------------------------------------------: | :-----------------------------------------------------: |
-| <img src="description_before.png" alt="Przed" width="400"/> | <img src="description_after.png" alt="Po" width="560"/> |
+| <img src="preview/pictures/description_before.png" alt="Przed" width="400"/> | <img src="preview/pictures/description_after.png" alt="Po" width="560"/> |
 
 **Legenda kolorów (typy zajęć):**
 

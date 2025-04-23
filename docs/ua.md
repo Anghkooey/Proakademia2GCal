@@ -16,7 +16,7 @@
 
 |           **До**           |          **Після**           |
 | :------------------------: | :--------------------------: |
-| ![До](calendar_before.png) | ![Після](calendar_after.png) |
+| ![До](preview/pictures/calendar_before.png) | ![Після](preview/pictures/calendar_after.png) |
 
 <div align="center">
   <h3><strong>Опис події</strong></h3>
@@ -24,7 +24,7 @@
 
 |                          **До**                          |                         **Після**                          |
 | :------------------------------------------------------: | :--------------------------------------------------------: |
-| <img src="description_before.png" alt="До" width="400"/> | <img src="description_after.png" alt="Після" width="560"/> |
+| <img src="preview/pictures/description_before.png" alt="До" width="400"/> | <img src="preview/pictures/description_after.png" alt="Після" width="560"/> |
 
 **Кольорова легенда (типи занять):**
 

@@ -16,7 +16,7 @@
 
 |             **Before**              |             **After**             |
 | :---------------------------------: | :-------------------------------: |
-| ![Before](docs/calendar_before.png) | ![After](docs/calendar_after.png) |
+| ![Before](docs/preview/pictures/calendar_before.png) | ![After](docs/preview/pictures/calendar_after.png) |
 
 <div align="center">
   <h3><strong>Event Description View</strong></h3>
@@ -24,7 +24,7 @@
 
 |                            **Before**                             |                            **After**                            |
 | :---------------------------------------------------------------: | :-------------------------------------------------------------: |
-| <img src="docs/description_before.png" alt="Before" width="400"/> | <img src="docs/description_after.png" alt="After" width="560"/> |
+| <img src="docs/preview/pictures/description_before.png" alt="Before" width="400"/> | <img src="docs/preview/pictures/description_after.png" alt="After" width="560"/> |
 
 **Color legend (event types):**
 
