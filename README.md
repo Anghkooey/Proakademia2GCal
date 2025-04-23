@@ -1,29 +1,64 @@
-# **ICS Importer for Google Calendar** 📅✨
+# ICS to Google Calendar Importer: Automated Import of ICS Schedules 📅✨
 
 <p align="center">
-  <a href="docs/pl.md"><img src="docs/flags/pl_icon.svg" width="70"></a>
-  <a>  </a>
-  <a href="README.md"><img src="docs/flags/en_icon.svg" width="70"></a>
-  <a>  </a>
-  <a href="docs/ua.md"><img src="docs/flags/ua_icon.svg" width="70"></a>
+  <a href="https://github.com/Anghkooey/uafm_ical/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Anghkooey/uafm_ical?style=for-the-badge" alt="License Badge">
+  </a>
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge">
+  </a>
+  <a href="https://github.com/Anghkooey/uafm_ical/commits/main">
+    <img src="https://img.shields.io/github/last-commit/Anghkooey/uafm_ical?style=for-the-badge" alt="Last Commit Badge">
+  </a>
 </p>
 
-**Welcome to the ICS Importer!** **This Python script is designed to import events from an** **ICS** **file into your** **Google Calendar**. **It’s specifically tailored for importing schedules from** [**Uniwersytet Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **You can get the ICS file from** **[this link](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**. **If you don't already have a calendar, the script will create a new one for you. It also cleans up old events (older than 30 days) before importing new ones.**
+<p align="center">
+  <a href="docs/pl.md"><img src="docs/flags/pl_icon.svg" width="70" alt="Polish"></a>
+  <a>  </a>
+  <a href="README.md"><img src="docs/flags/en_icon.svg" width="70" alt="English"></a>
+  <a>  </a>
+  <a href="docs/ua.md"><img src="docs/flags/ua_icon.svg" width="70" alt="Ukrainian"></a>
+</p>
+
+**No more copying classes by hand! 😩 This Python script takes your **ICS (iCalendar)** file and automatically imports it into your **Google Calendar** — fast, clean, and smart. ✨**
+
+**Originally built for [Uniwersytet Andrzeja Frycza Modrzewskiego](https://uafm.edu.pl/). You can get the ICS file from [this link](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**.
+
+**✔️ Auto-creates a calendar if you don’t have one  
+✔️ Deletes old entries (older than 30 days)  
+✔️ Cleans up and formats your schedule like a pro**
+
+## ✨ Key Features
+
+- **Effortless Import:** Automatically add your schedule to Google Calendar.
+- **Universal Compatibility:** Works with ICS files from various university systems (e.g., APR System, Mobilny Student).
+- **New Calendar Option:** Creates a new "Study" calendar if you don't specify one.
+- **Clean Calendar:** Removes events older than 30 days before importing.
+- **Color-Coded Events:** Visually distinguish event types (Exams ❤️, Lectures 🖤, etc.).
+- **Time Zone Handling:** Uses your Google Calendar's time zone for accurate event times.
+
+## 🚀 Quick Preview
+
+See the magic happen! ✨ This animation shows how the script imports your ICS schedule into Google Calendar.
 
 <div align="center">
-  <h3><strong>Calendar View</strong></h3>
+<img src="docs/preview/preview.gif" alt="ICS to Google Calendar Import Preview" width="600">
 </div>
 
-|             **Before**              |             **After**             |
-| :---------------------------------: | :-------------------------------: |
+<div align="center">
+<h3>🗓️ Calendar View</h3>
+</div>
+
+|                      **Before**                      |                     **After**                      |
+| :--------------------------------------------------: | :------------------------------------------------: |
 | ![Before](docs/preview/pictures/calendar_before.png) | ![After](docs/preview/pictures/calendar_after.png) |
 
 <div align="center">
-  <h3><strong>Event Description View</strong></h3>
+  <h3><strong>📝 Event Description View</strong></h3>
 </div>
 
-|                            **Before**                             |                            **After**                            |
-| :---------------------------------------------------------------: | :-------------------------------------------------------------: |
+|                                     **Before**                                     |                                    **After**                                     |
+| :--------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img src="docs/preview/pictures/description_before.png" alt="Before" width="400"/> | <img src="docs/preview/pictures/description_after.png" alt="After" width="560"/> |
 
 **Color legend (event types):**
@@ -39,36 +74,28 @@
 
 ## **Installation** 🛠️
 
-**Before running the script, ensure you have the following dependencies installed:**
+1. **Prerequisites:** Make sure you have Python 3.x installed.
+2. **Install Dependencies:**
 
 ```bash
 pip install gcsa ics pytz
 ```
 
-## **Setup Google API Credentials** 🔑
+## 🔑 Setup Google API Credentials
 
-**In order to interact with your Google Calendar, you need to set up your API credentials.**
+Follow these steps to authorize the script to access your Google Calendar:
 
-### **Steps to get your Google API credentials:**
+1. **Create a Google Cloud Platform (GCP) project:** [Guide](https://developers.google.com/workspace/guides/create-project)
+   - **Important:** Enable the **Google Calendar API** for your project.
+2. **Configure the OAuth consent screen:** [Guide](https://developers.google.com/workspace/guides/configure-oauth-consent)
+3. **Create an OAuth client ID credential:** [Guide](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id) and download `credentials.json`.
+4. **Store the credentials:** Place the downloaded `credentials.json` file in the `~/.credentials/` directory.
 
-1. **Create a new Google Cloud Platform (GCP) project**[Follow this guide to create a project](https://developers.google.com/workspace/guides/create-project).
+> **Note:** This [quickstart guide](https://developers.google.com/workspace/calendar/api/quickstart/python) might be helpful.
 
-   - **Important**: **Enable the** **Google Calendar API** **for your project.**
+## 🎉 Usage
 
-2. **Configure the OAuth consent screen**
-   [Follow this guide for configuring the OAuth consent screen](https://developers.google.com/workspace/guides/configure-oauth-consent).
-3. **Create an OAuth client ID credential**
-   [Create OAuth credentials and download the `credentials.json`](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id).
-4. **Store the credentials**
-   **Place the downloaded** `credentials.json` **file (client*secret*\*.json) into the** `~/.credentials/` **directory.**
-
-> **Note**: **You may find** [**this quickstart guide**](https://developers.google.com/workspace/calendar/api/quickstart/python) **helpful for setting up Google Calendar API credentials.**
-
-## **Usage** 🎉
-
-### **Example 1: Import Events to a Specific Calendar** 🗓️
-
-**If you already have a calendar:**
+### 🗓️ Example 1: Import to a Specific Calendar
 
 ```python
 from main import ics_import
@@ -77,9 +104,9 @@ from config import calendar_id
 ics_import(calendar_id)
 ```
 
-### **Example 2: Create a New Calendar and Import Events** 🌐
+(Assuming you have `calendar_id` defined in `config.py`)
 
-**If no calendar is provided, a new one will be created:**
+### 🌐 Example 2: Create a New Calendar and Import
 
 ```python
 from main import ics_import
@@ -87,9 +114,7 @@ from main import ics_import
 ics_import()
 ```
 
-### **Example 3: Edit ICS File (Adjust Time Zone)** 🕰️
-
-If you need to adjust the time zone of the events in your ICS file before importing, use the `ics_edit` function:
+### 🕰️ Example 3: Edit ICS File (Adjust Time Zone)
 
 ```python
 from main import ics_edit
@@ -97,25 +122,28 @@ from main import ics_edit
 ics_edit()
 ```
 
-This function allows you to clean up and adjust the start and end times of the events according to your desired time zone.
+This function helps clean up and adjust event times.
 
-## **How It Works** ⚙️
+## ⚙️ How It Works
 
-- **Create or Use Google Calendar**: **If no** `calendar_id` **is provided, a new calendar named "Study" is created.**
-- **Time Zone Handling**: **The script uses your calendar's time zone for event times.**
-- **Event Cleanup**: **Events older than 30 days are deleted before new ones are added.**
-- **Color Coding**: **Event colors are assigned based on the event type** (e.g., **Exam**, **Online**, **Group Work**).
+- **Calendar Handling:** Creates a new "Study" calendar or uses an existing one.
+- **Time Zone Magic:** Ensures events are in your calendar's time zone.
+- **Cleanup Crew:** Removes old events to keep your calendar tidy.
+- **Color Coordination:** Assigns colors based on event type.
 
-## **Customization** 🎨
+## 🎨 Customization
 
-- **ICS File Path**: **Modify the** `ics_path` **parameter to use a different ICS file.**
-- **Authentication**: **Skip browser authentication by setting** `open_browser=False` **if you've already authenticated.**
+- **ICS File Path:** Modify `ics_path` to use a different ICS file.
+- **Authentication:** Set `open_browser=False` if you've already authenticated.
 
-## **gcsa Documentation** 📚
+## 🤝 Contributing
 
-**For full documentation on the** `gcsa` **library (which interacts with the Google Calendar API), visit:**
-[**gcsa Documentation**](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)
+**Feel free to contribute! Fork the repository, create a branch, and submit a pull request. Let's make this script even better together! 💪**
 
-## **License** 📜
+## 📜 License
 
-**Licensed under GNU General Public License v3** - see the [**LICENSE**](LICENSE) file for details.
+**Licensed under the [GNU General Public License v3](https://www.google.com/search?q=LICENSE).**
+
+## 📚 Documentation
+
+**For detailed information about the `gcsa` library, visit: [gcsa Documentation](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)**
