@@ -1,4 +1,4 @@
-# Importer ICS do Google Kalendarza: Automatyczny import harmonogramów 📅✨
+# **Importer ICS do Google Calendar** 📅✨
 
 <p align="center">
   <a href="https://github.com/Anghkooey/uafm_ical/blob/main/LICENSE">
@@ -20,9 +20,7 @@
   <a href="ua.md"><img src="flags/ua_icon.svg" width="70" alt="Ukraiński"></a>
 </p>
 
-**Masz dość ręcznego dodawania zajęć do Kalendarza Google? 😩 Ten skrypt w Pythonie zrobi to za Ciebie automatycznie!** **Importuj wydarzenia z pliku ICS (iCalendar) bez żadnego wysiłku — szybko, czysto i inteligentnie. ✨**
-
-**Oryginalnie stworzony dla [Uniwersytetu Andrzeja Frycza Modrzewskiego](https://uafm.edu.pl/), działa z każdym plikiem ICS, również z systemów jak Mobilny Student: [link do planów](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup).**
+**Witamy w ICS Importer!** **Ten skrypt w Pythonie jest zaprojektowany do importowania wydarzeń z pliku** **ICS** **do Twojego** **Google Calendar**. **Jest szczególnie dostosowany do importowania harmonogramów z** [**Uniwersytetu Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **Plik ICS możesz pobrać z** **[tego linku](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**.
 
 **✔️ Tworzy kalendarz, jeśli go nie masz  
 ✔️ Usuwa wydarzenia starsze niż 30 dni  
