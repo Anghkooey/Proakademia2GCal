@@ -6,6 +6,7 @@ from typing import List, Optional
 from gcsa.calendar import Calendar as GCSACalendar
 from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
+from google.auth.exceptions import RefreshError
 from ics import Calendar as ICSCalendar
 from ics import Event as ICSEvent
 from pytz import timezone
@@ -119,73 +120,146 @@ def ics_import(
     calendar_id: Optional[str] = None,
     ics_path: str = "Plany.ics",
     open_browser: bool = True,
+    _retry: bool = False,
 ):
     """
-    Imports events from an ICS file into a Google Calendar, either creating a new calendar or updating an existing one.
+    Imports events from an ICS file into a Google Calendar, either by updating an existing calendar or creating a new one.
+
+    This function handles expired or revoked OAuth tokens automatically: if authentication fails due to an invalid token,
+    the token file (`~/.credentials/token.pickle`) will be deleted and the function will retry once.
 
     Parameters:
-    - calendar_id (Optional[str]): The ID of an existing Google Calendar to import events into. If None, creates a new calendar.
-    - ics_path (str): Path to the ICS file containing the events to import.
-    - open_browser (bool): Flag indicating whether to open a browser for Google authentication.
+    ----------
+    calendar_id : Optional[str], default=None
+        The ID of the target Google Calendar to import events into.
+        If None, the function will search for an existing "Study" calendar or create a new one.
 
-    Algorithm:
-    1. If a calendar ID is provided, uses that calendar.
-    2. If no calendar ID is provided, checks for an existing 'Study' calendar and deletes it.
-    3. Creates a new calendar if necessary, or reuses the existing one.
-    4. Fetches events from the last 30 days and deletes them.
-    5. Loads events from the ICS file.
-    6. Determines the color for each event, extracts the location, and cleans the description.
-    7. Adds each event to the Google Calendar with the appropriate time zone and other details.
+    ics_path : str, default="Plany.ics"
+        Path to the ICS (iCalendar) file containing the events to import.
+
+    open_browser : bool, default=True
+        If True, opens a browser window for OAuth authentication when needed.
+        If False, attempts to authenticate silently using existing credentials.
+
+    _retry : bool, default=False
+        Internal flag to prevent infinite retry loops.
+        Should not be modified manually when calling the function.
+
+    Workflow:
+    ---------
+    1. Attempt to authenticate using stored credentials.
+    2. If `calendar_id` is provided, validate and select the specified calendar.
+    3. If no `calendar_id`, check for an existing "Study" calendar:
+        - If found, delete it and create a new one.
+        - If not found, create a new calendar named "Study."
+    4. Clean the calendar:
+        - Fetch and delete all events older than 30 days.
+    5. Parse and load events from the provided ICS file.
+    6. For each event:
+        - Adjust timezones based on Google Calendar settings.
+        - Extract location and clean event description.
+        - Assign a color based on the event type (Lecture, Exam, Seminar, etc.).
+        - Import the event into the selected Google Calendar.
+    7. If token is expired or revoked:
+        - Delete the corrupted token file.
+        - Retry authentication and import once.
+
+    Raises:
+    -------
+    google.auth.exceptions.RefreshError
+        If authentication fails even after attempting to delete and refresh the credentials.
+
+    Notes:
+    ------
+    - Token expiration is detected and handled automatically.
+    - Protects users from accidentally deleting their primary Google Calendar.
+    - This function is designed to be idempotent: if rerun with the same ICS file and calendar, it will refresh events cleanly.
+    - Timezone handling ensures consistency between event times in the ICS file and the target Google Calendar.
+
     """
-    gc = GoogleCalendar(open_browser=open_browser)
+    try:
+        gc = GoogleCalendar(open_browser=open_browser)
 
-    if calendar_id:
-        if gc.get_calendar().id == gc.get_calendar(calendar_id).id:
-            confirmation = input("⚠️ You’re about to delete your primary calendar. Proceed? (yes/no): ")
-            if confirmation.lower() != "yes":
-                print("🚫 Operation aborted.")
-                exit()
-        gc = GoogleCalendar(calendar_id)
+        if calendar_id:
+            if gc.get_calendar().id == gc.get_calendar(calendar_id).id:
+                confirmation = input(
+                    "⚠️ You’re about to delete your primary calendar. Proceed? (yes/no): "
+                )
+                if confirmation.lower() != "yes":
+                    print("🚫 Operation aborted.")
+                    exit()
+            gc = GoogleCalendar(calendar_id)
 
-        events_to_delete = list(gc.get_events(time_min=(datetime.now() - timedelta(days=30))))
-        for e in tqdm(events_to_delete, total=len(events_to_delete), desc="🗑️ Deleting old events", ncols=80, colour="MAGENTA", leave=False):
-            gc.delete_event(e.id)
-        print("✅ Completed: 🗑️  Delete old events")
-    else:
-        for calendar in gc.get_calendar_list():
-            if calendar.summary == "Study":
-                gc.delete_calendar(calendar.id)
-                print(f"🗑️ Old calendar deleted: {calendar.id}")
-
-        calendar_id = gc.add_calendar(GCSACalendar("Study")).calendar_id
-        gc = GoogleCalendar(calendar_id, open_browser=open_browser)
-        print(f"✅ New calendar created: {calendar_id}")
-
-    tz = timezone(gc.get_settings().timezone)
-
-    ics_events = list(load_ics_events(ics_path))
-    for e in tqdm(ics_events, total=len(ics_events), desc="📅 Importing new events", ncols=80, colour="CYAN", leave=False):
-        desc = e.description or ""
-        if "odwołane" in desc:
-            continue
-
-        location = extract_location(desc)
-        summary = f"{location} {e.name}".strip()
-        cleaned_desc = clean_description(desc)
-
-        start = tz.localize(e.begin.datetime.replace(tzinfo=None))
-        end = tz.localize(e.end.datetime.replace(tzinfo=None))
-
-        gc.add_event(
-            Event(
-                summary=summary,
-                start=start,
-                end=end,
-                description=cleaned_desc,
-                color_id=determine_color(desc),
+            events_to_delete = list(
+                gc.get_events(time_min=(datetime.now() - timedelta(days=30)))
             )
-        )
-    print("✅ Completed: 📅 Import new events")
+            for e in tqdm(
+                events_to_delete,
+                total=len(events_to_delete),
+                desc="🗑️ Deleting old events",
+                ncols=80,
+                colour="MAGENTA",
+                leave=False,
+            ):
+                gc.delete_event(e.id)
+            print("✅ Completed: 🗑️  Delete old events")
+        else:
+            for calendar in gc.get_calendar_list():
+                if calendar.summary == "Study":
+                    gc.delete_calendar(calendar.id)
+                    print(f"🗑️ Old calendar deleted: {calendar.id}")
+
+            calendar_id = gc.add_calendar(GCSACalendar("Study")).calendar_id
+            gc = GoogleCalendar(calendar_id, open_browser=open_browser)
+            print(f"✅ New calendar created: {calendar_id}")
+
+        tz = timezone(gc.get_settings().timezone)
+
+        ics_events = list(load_ics_events(ics_path))
+        for e in tqdm(
+            ics_events,
+            total=len(ics_events),
+            desc="📅 Importing new events",
+            ncols=80,
+            colour="CYAN",
+            leave=False,
+        ):
+            desc = e.description or ""
+            if "odwołane" in desc:
+                continue
+
+            location = extract_location(desc)
+            summary = f"{location} {e.name}".strip()
+            cleaned_desc = clean_description(desc)
+
+            start = tz.localize(e.begin.datetime.replace(tzinfo=None))
+            end = tz.localize(e.end.datetime.replace(tzinfo=None))
+
+            gc.add_event(
+                Event(
+                    summary=summary,
+                    start=start,
+                    end=end,
+                    description=cleaned_desc,
+                    color_id=determine_color(desc),
+                )
+            )
+        print("✅ Completed: 📅 Import new events")
+
+    except RefreshError as e:
+        if not _retry:
+            print("⚠️ Detected invalid or expired token. Removing token and retrying...")
+            token_path = os.path.expanduser("~/.credentials/token.pickle")
+            if os.path.exists(token_path):
+                os.remove(token_path)
+                print(f"🗑️ Deleted token file: {token_path}")
+            else:
+                print(f"⚠️ Token file not found at: {token_path}")
+
+            ics_import(calendar_id, ics_path, open_browser, _retry=True)
+        else:
+            print("❌ Failed to refresh credentials even after retrying.")
+            raise e
 
 
 def ics_edit(
