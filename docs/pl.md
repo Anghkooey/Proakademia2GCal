@@ -84,9 +84,9 @@ Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](h
 
 **Uwaga!** Aby uzyskać te fajne, oznaczone kolorami wydarzenia, jak na podglądzie, potrzebujesz skryptu Pythona i `ics_import` (patrz Przykłady powyżej). Pliki wykonywalne obsługują podstawowy import, ale Python odblokowuje kolorową magię ✨.
 
-### 🛠️ Zaawansowana edycja ICS
+### 🗓️ Przewodnik importu pliku ICS
 
-Potrzebujesz dostosować plik ICS? Skompilowany program może pomóc!
+To jest ogólny przewodnik po tym, jak importować plik ICS do Kalendarza Google.
 
 ![Ręczny import ICS](preview/manual_import.gif)
 

@@ -84,9 +84,9 @@ Want it fast and easy? Use the compiled executables from [Releases](https://gith
 
 **Heads up!** For those sweet color-coded events like in the preview, you'll need the Python script and `ics_import` (see Examples above). The executables handle the core import, but Python unlocks the color magic ✨.
 
-### 🛠️ Advanced ICS Editing
+### 🗓️ ICS File Import Guide
 
-Need to tweak that ICS file? The compiled program can help!
+This is a general guide on how to import an ICS file into Google Calendar.
 
 ![Manual ICS Import](docs/preview/manual_import.gif)
 
