@@ -1,5 +1,4 @@
 # **ICS Importer for Google Calendar** 📅✨
-
 <p align="center">
   <a href="https://github.com/Anghkooey/uafm_ical/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Anghkooey/uafm_ical?style=for-the-badge" alt="License Badge">
@@ -9,6 +8,9 @@
   </a>
   <a href="https://github.com/Anghkooey/uafm_ical/commits/main">
     <img src="https://img.shields.io/github/last-commit/Anghkooey/uafm_ical?style=for-the-badge" alt="Last Commit Badge">
+  </a>
+  <a href="https://github.com/Anghkooey/uafm_ical/releases">
+    <img src="https://img.shields.io/github/release/Anghkooey/uafm_ical?style=for-the-badge" alt="Latest Release Badge">
   </a>
 </p>
 
