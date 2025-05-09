@@ -11,6 +11,7 @@ from pytz import timezone
 # Regex pattern to extract certain lines from descriptions (Sala, Uwagi, Prowadzący)
 KEEP_PATTERN = re.compile(r"^(Sala|Uwagi|Prowadzący|Grupy):\s*\S+")
 
+
 def extract_location(desc: str) -> str:
     """
     Extracts the location (Sala) information from the event description.
@@ -27,6 +28,7 @@ def extract_location(desc: str) -> str:
     """
     match = re.search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
     return f"{match.group(1)} {match.group(2)}" if match else ""
+
 
 def clean_description(desc: str) -> str:
     """
@@ -47,6 +49,7 @@ def clean_description(desc: str) -> str:
         line for line in desc.splitlines() if KEEP_PATTERN.match(line.strip())
     ).strip()
 
+
 def load_ics_events(path: str) -> list:
     """
     Loads events from an ICS file.
@@ -63,6 +66,7 @@ def load_ics_events(path: str) -> list:
     """
     with open(path, encoding="utf-8") as f:
         return list(ICSCalendar(f.read()).events)
+
 
 def ics_edit(
     input_path: str = "Plany.ics",
@@ -136,37 +140,39 @@ def main():
     # RawTextHelpFormatter is used to preserve formatting in the help message.
     parser = argparse.ArgumentParser(
         description="Edits an ICS (iCalendar) file. Cleans event descriptions, "
-                    "extracts relevant information (like location), and adjusts "
-                    "event times based on the specified timezone.\n\n"
-                    "If INPUT_PATH is not provided, a file selection dialog will open.",
-        formatter_class=argparse.RawTextHelpFormatter
+        "extracts relevant information (like location), and adjusts "
+        "event times based on the specified timezone.\n\n"
+        "If INPUT_PATH is not provided, a file selection dialog will open.",
+        formatter_class=argparse.RawTextHelpFormatter,
     )
 
     # Define the positional argument for the input file path.
     # It's made optional (nargs='?') so the script can run without arguments
     # to trigger the file dialog.
     parser.add_argument(
-        'input_path',
-        nargs='?',  # Makes the argument optional
-        help="Path to the input .ics file."
+        "input_path",
+        nargs="?",  # Makes the argument optional
+        help="Path to the input .ics file.",
     )
 
     # Define an optional argument for the output file path.
     # Provides a default value if not specified by the user.
     parser.add_argument(
-        '-o', '--output_path',
+        "-o",
+        "--output_path",
         default="Plany_edited.ics",
         help="Path to save the edited .ics file.\n"
-             "Defaults to 'Plany_edited.ics' in the current directory."
+        "Defaults to 'Plany_edited.ics' in the current directory.",
     )
 
     # Define an optional argument for the timezone string.
     # Provides a default timezone (Warsaw) if not specified.
     parser.add_argument(
-        '-t', '--timezone',
+        "-t",
+        "--timezone",
         default="Europe/Warsaw",
         help="Timezone to apply to event times (e.g., 'UTC', 'America/New_York').\n"
-             "Defaults to 'Europe/Warsaw'."
+        "Defaults to 'Europe/Warsaw'.",
     )
 
     # argparse automatically adds a -h/--help argument based on the description.
@@ -189,12 +195,11 @@ def main():
         input_file = filedialog.askopenfilename(
             initialdir=".",  # Start Browse from the current directory
             title="Select an ICS file to edit",
-            filetypes=(("ICS files", "*.ics"), ("All files", "*.*"))
+            filetypes=(("ICS files", "*.ics"), ("All files", "*.*")),
         )
 
         # Destroy the hidden root window after the dialog is closed.
         root.destroy()
-
 
     # Proceed only if an input file was successfully obtained (either from args or dialog).
     if input_file:
@@ -208,19 +213,20 @@ def main():
             ics_edit(
                 input_path=input_file,
                 output_path=args.output_path,
-                timezone_str=args.timezone
+                timezone_str=args.timezone,
             )
         except Exception as e:
             # Catch any exceptions that occur during the ICS processing
             # and report them to the user.
             print(f"An error occurred during file processing: {e}")
-            sys.exit(1) # Exit with a non-zero status code
+            sys.exit(1)  # Exit with a non-zero status code
 
     else:
         # If input_file is still None, it means the user closed the file dialog
         # without selecting a file.
         print("No ICS file selected. Exiting program.")
-        sys.exit(0) # Exit cleanly as the user chose not to proceed
+        sys.exit(0)  # Exit cleanly as the user chose not to proceed
+
 
 # Standard Python entry point check. Ensures the main function is called
 # when the script is executed directly.

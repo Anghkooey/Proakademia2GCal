@@ -10,12 +10,15 @@
   <a href="https://github.com/Anghkooey/uafm_ical/commits/main">
     <img src="https://img.shields.io/github/last-commit/Anghkooey/uafm_ical?style=for-the-badge" alt="Last Commit Badge">
   </a>
+  <a href="https://github.com/Anghkooey/uafm_ical/releases">
+    <img src="https://img.shields.io/github/release/Anghkooey/uafm_ical?style=for-the-badge" alt="Latest Release Badge">
+  </a>
 </p>
 
 <p align="center">
   <a href="pl.md"><img src="flags/pl_icon.svg" width="70" alt="Polski"></a>
   <a>  </a>
-  <a href="README.md"><img src="flags/en_icon.svg" width="70" alt="Angielski"></a>
+  <a href="../README.md"><img src="flags/en_icon.svg" width="70" alt="Angielski"></a>
   <a>  </a>
   <a href="ua.md"><img src="flags/ua_icon.svg" width="70" alt="Ukraiński"></a>
 </p>
@@ -34,6 +37,7 @@
 - **Czysty kalendarz:** Przed importem usuwa stare wydarzenia.
 - **Koloryzacja wydarzeń:** Rozróżnia typy zajęć kolorami (Egzaminy ❤️, Wykłady 🖤 itd.).
 - **Obsługa stref czasowych:** Wszystko zsynchronizowane ze strefą czasową Twojego kalendarza.
+- **Skompilowane wersje:** Aplikacja jest również dostępna jako skompilowane pliki wykonywalne dla systemów Windows i Linux, co upraszcza użycie bez instalacji Pythona. Zobacz stronę [Wydania](https://github.com/Anghkooey/uafm_ical/releases).
 
 ## 🚀 Szybki podgląd
 
@@ -47,28 +51,50 @@
 <h3>🗓️ Widok kalendarza</h3>
 </div>
 
-|                      **Przed**                      |                     **Po**                      |
-| :-------------------------------------------------: | :---------------------------------------------: |
-| ![Before](preview/pictures/calendar_before.png)     | ![After](preview/pictures/calendar_after.png)   |
+|                    **Przed**                    |                    **Po**                     |
+| :---------------------------------------------: | :-------------------------------------------: |
+| ![Before](preview/pictures/calendar_before.png) | ![After](preview/pictures/calendar_after.png) |
 
 <div align="center">
   <h3><strong>📝 Widok opisu wydarzenia</strong></h3>
 </div>
 
-|                                        **Przed**                                         |                                      **Po**                                      |
-| :--------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
-| <img src="preview/pictures/description_before.png" alt="Before" width="400"/>           | <img src="preview/pictures/description_after.png" alt="After" width="560"/>     |
+|                                   **Przed**                                   |                                   **Po**                                    |
+| :---------------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| <img src="preview/pictures/description_before.png" alt="Before" width="400"/> | <img src="preview/pictures/description_after.png" alt="After" width="560"/> |
 
 **Legenda kolorów (typy wydarzeń):**
 
-- ❤️ **Tomato** – Egzamin  
-- 💜 **Grape** – Online lub Odwołane  
-- 🖤 **Graphite** – Wykład  
-- 💚 **Basil** – Ćwiczenia / Seminaria  
-- 💙 **Peacock** – Laboratoria  
-- 💛 **Banana** – Inne / Nieznane  
+- ❤️ **Tomato** – Egzamin
+- 💜 **Grape** – Online lub Odwołane
+- 🖤 **Graphite** – Wykład
+- 💚 **Basil** – Ćwiczenia / Seminaria
+- 💙 **Peacock** – Laboratoria
+- 💛 **Banana** – Inne / Nieznane
 
 > **Możesz edytować kolory w słowniku `COLORS` w kodzie źródłowym.**
+
+### 💻 Szybka instalacja i uruchomienie
+
+Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](https://github.com/Anghkooey/uafm_ical/releases)!
+
+- **Windows:** Pobierz `ics_edit_windows.exe` i gotowe!
+
+  <div align="center">
+  <img src="preview/ics_edit_windows.gif" alt="Użycie ICS Edit Windows" width="600">
+  </div>
+
+- **Linux:** Pobierz `ics_edit_linux` i gotowe!
+
+**Uwaga!** Aby uzyskać te fajne, oznaczone kolorami wydarzenia, jak na podglądzie, potrzebujesz skryptu Pythona i `ics_import` (patrz Przykłady powyżej). Pliki wykonywalne obsługują podstawowy import, ale Python odblokowuje kolorową magię ✨.
+
+### 🛠️ Zaawansowana edycja ICS
+
+Potrzebujesz dostosować plik ICS? Skompilowany program może pomóc!
+
+<div align="center">
+<img src="preview/manual_import.gif" alt="Ręczny import ICS" width="600">
+</div>
 
 ## 🛠️ Instalacja
 
@@ -97,9 +123,8 @@ Aby skrypt mógł używać Kalendarza Google, wykonaj następujące kroki:
 
 ```python
 from main import ics_import
-from config import calendar_id
 
-ics_import(calendar_id)
+calendar_id = "YOUR_CALENDAR_ID"  # Zastąp rzeczywistym identyfikatorem kalendarza
 ```
 
 ### 🌐 Przykład 2: Utwórz nowy kalendarz i zaimportuj
@@ -136,8 +161,10 @@ ics_edit()
 
 ## 📜 Licencja
 
-Na licencji [GNU General Public License v3](https://www.google.com/search?q=LICENSE)
+**Na licencji [GNU General Public License v3](https://www.google.com/search?q=LICENSE)**
 
 ## 📚 Dokumentacja
 
 **Zajrzyj do dokumentacji biblioteki `gcsa`: [gcsa docs](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)**
+
+### <a target="_blank" href="https://icons8.com/icon/Xm1BwlEApHW6/google-calendar">Google Calendar</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>

@@ -1,4 +1,5 @@
 # **ICS Importer for Google Calendar** 📅✨
+
 <p align="center">
   <a href="https://github.com/Anghkooey/uafm_ical/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Anghkooey/uafm_ical?style=for-the-badge" alt="License Badge">
@@ -36,6 +37,7 @@
 - **Clean Calendar:** Removes events older than 30 days before importing.
 - **Color-Coded Events:** Visually distinguish event types (Exams ❤️, Lectures 🖤, etc.).
 - **Time Zone Handling:** Uses your Google Calendar's time zone for accurate event times.
+- **Compiled Versions:** The application is also available as compiled executables for Windows and Linux, simplifying usage without Python installation. See the [Releases](https://github.com/Anghkooey/uafm_ical/releases) page.
 
 ## 🚀 Quick Preview
 
@@ -72,6 +74,28 @@ See the magic happen! ✨ This animation shows how the script imports your ICS s
 
 **You can change colors by editing the `COLORS` dictionary and related conditions in the code.**
 
+### 💻 Quick Install & Run
+
+Want it fast and easy? Use the compiled executables from [Releases](https://github.com/Anghkooey/uafm_ical/releases)!
+
+- **Windows:** Grab `ics_edit_windows.exe` and go!
+
+  <div align="center">
+  <img src="docs/preview/ics_edit_windows.gif" alt="ICS Edit Windows Usage" width="600">
+  </div>
+
+- **Linux:** Grab `ics_edit_linux` and go!
+
+**Heads up!** For those sweet color-coded events like in the preview, you'll need the Python script and `ics_import` (see Examples above). The executables handle the core import, but Python unlocks the color magic ✨.
+
+### 🛠️ Advanced ICS Editing
+
+Need to tweak that ICS file? The compiled program can help!
+
+<div align="center">
+<img src="docs/preview/manual_import.gif" alt="Manual ICS Import" width="600">
+</div>
+
 ## **Installation** 🛠️
 
 1. **Prerequisites:** Make sure you have Python 3.x installed.
@@ -99,8 +123,8 @@ Follow these steps to authorize the script to access your Google Calendar:
 
 ```python
 from main import ics_import
-from config import calendar_id
 
+calendar_id = "YOUR_CALENDAR_ID"  # Replace with your actual Calendar ID
 ics_import(calendar_id)
 ```
 
@@ -147,3 +171,5 @@ This function helps clean up and adjust event times.
 ## 📚 Documentation
 
 **For detailed information about the `gcsa` library, visit: [gcsa Documentation](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)**
+
+### <a target="_blank" href="https://icons8.com/icon/Xm1BwlEApHW6/google-calendar">Google Calendar</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
