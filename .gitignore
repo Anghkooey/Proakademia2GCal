@@ -4,4 +4,4 @@ __pycache__
 *.ics
 build
 dist
- ics_edit.spec
+ics_edit.spec
