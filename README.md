@@ -43,9 +43,7 @@
 
 See the magic happen! ✨ This animation shows how the script imports your ICS schedule into Google Calendar.
 
-<div align="center">
-<img src="docs/preview/preview.gif" alt="ICS to Google Calendar Import Preview" width="600">
-</div>
+![ICS to Google Calendar Import Preview](docs/preview/preview.gif)
 
 <div align="center">
 <h3>🗓️ Calendar View</h3>
@@ -80,9 +78,7 @@ Want it fast and easy? Use the compiled executables from [Releases](https://gith
 
 - **Windows:** Grab `ics_edit_windows.exe` and go!
 
-  <div align="center">
-  <img src="docs/preview/ics_edit_windows.gif" alt="ICS Edit Windows Usage" width="600">
-  </div>
+![ICS Edit Windows Usage](docs/preview/ics_edit_windows.gif)
 
 - **Linux:** Grab `ics_edit_linux` and go!
 
@@ -92,9 +88,7 @@ Want it fast and easy? Use the compiled executables from [Releases](https://gith
 
 Need to tweak that ICS file? The compiled program can help!
 
-<div align="center">
-<img src="docs/preview/manual_import.gif" alt="Manual ICS Import" width="600">
-</div>
+![Manual ICS Import](docs/preview/manual_import.gif)
 
 ## **Installation** 🛠️
 

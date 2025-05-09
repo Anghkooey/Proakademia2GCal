@@ -43,9 +43,7 @@
 
 **Zobacz skrypt w akcji! ✨ Animacja pokazuje import planu zajęć do Google Kalendarza.**
 
-<div align="center">
-<img src="preview/preview.gif" alt="Podgląd importu ICS" width="600">
-</div>
+![Podgląd importu ICS do Kalendarza Google](preview/preview.gif)
 
 <div align="center">
 <h3>🗓️ Widok kalendarza</h3>
@@ -80,9 +78,7 @@ Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](h
 
 - **Windows:** Pobierz `ics_edit_windows.exe` i gotowe!
 
-  <div align="center">
-  <img src="preview/ics_edit_windows.gif" alt="Użycie ICS Edit Windows" width="600">
-  </div>
+![Użycie ICS Edit Windows](preview/ics_edit_windows.gif)
 
 - **Linux:** Pobierz `ics_edit_linux` i gotowe!
 
@@ -92,9 +88,7 @@ Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](h
 
 Potrzebujesz dostosować plik ICS? Skompilowany program może pomóc!
 
-<div align="center">
-<img src="preview/manual_import.gif" alt="Ręczny import ICS" width="600">
-</div>
+![Ręczny import ICS](preview/manual_import.gif)
 
 ## 🛠️ Instalacja
 
