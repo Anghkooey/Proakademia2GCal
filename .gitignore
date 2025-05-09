@@ -2,3 +2,6 @@ t.py
 __pycache__
 .ropeproject
 *.ics
+build
+dist
+ ics_edit.spec

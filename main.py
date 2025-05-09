@@ -1,16 +1,16 @@
 import os
-import re
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import Optional
 
 from gcsa.calendar import Calendar as GCSACalendar
 from gcsa.event import Event
 from gcsa.google_calendar import GoogleCalendar
 from google.auth.exceptions import RefreshError
-from ics import Calendar as ICSCalendar
-from ics import Event as ICSEvent
 from pytz import timezone
 from tqdm import tqdm
+
+# Import necessary functions and variables from ics_edit.py
+from ics_edit import extract_location, clean_description, load_ics_events, ics_edit  # noqa: F401
 
 # Color mapping for calendar events based on descriptions
 COLORS = {
@@ -26,9 +26,6 @@ COLORS = {
     "Basil": "10",  # Green
     "Tomato": "11",  # Red
 }
-
-# Regex pattern to extract certain lines from descriptions (Sala, Uwagi, Prowadzący)
-KEEP_PATTERN = re.compile(r"^(Sala|Uwagi|Prowadzący|Grupy):\s*\S+")
 
 
 def determine_color(desc: str) -> str:
@@ -58,62 +55,6 @@ def determine_color(desc: str) -> str:
     elif any(k in desc for k in ("Grupy: Cw", "Grupy: Lek")):
         return COLORS["Basil"]
     return COLORS["Banana"]  # Default
-
-
-def extract_location(desc: str) -> str:
-    """
-    Extracts the location (Sala) information from the event description.
-
-    Parameters:
-    - desc (str): The description text of the event.
-
-    Returns:
-    - str: Extracted location (if any), otherwise an empty string.
-
-    Algorithm:
-    1. Uses regex to match the "Sala" and room number in the description.
-    2. Returns the formatted location string (e.g., "A 101").
-    """
-    match = re.search(r"Sala:\s*(?:bud\.)?\s*([A-Z])(?:\s+\1)?\s*(\d+)", desc)
-    return f"{match.group(1)} {match.group(2)}" if match else ""
-
-
-def clean_description(desc: str) -> str:
-    """
-    Cleans the event description by keeping only relevant lines (Sala, Uwagi, Prowadzący).
-
-    Parameters:
-    - desc (str): The description text of the event.
-
-    Returns:
-    - str: Cleaned description containing only relevant lines.
-
-    Algorithm:
-    1. Splits the description into lines.
-    2. Filters lines matching the KEEP_PATTERN regex.
-    3. Returns a cleaned description with the relevant lines joined together.
-    """
-    return "\n".join(
-        line for line in desc.splitlines() if KEEP_PATTERN.match(line.strip())
-    ).strip()
-
-
-def load_ics_events(path: str) -> List:
-    """
-    Loads events from an ICS file.
-
-    Parameters:
-    - path (str): The path to the ICS file.
-
-    Returns:
-    - List: List of events parsed from the ICS file.
-
-    Algorithm:
-    1. Opens the ICS file and parses its content.
-    2. Extracts and returns all events from the ICS calendar.
-    """
-    with open(path, encoding="utf-8") as f:
-        return list(ICSCalendar(f.read()).events)
 
 
 def ics_import(
@@ -154,11 +95,11 @@ def ics_import(
         - If not found, create a new calendar named "Study."
     4. Clean the calendar:
         - Fetch and delete all events older than 30 days.
-    5. Parse and load events from the provided ICS file.
+    5. Parse and load events from the provided ICS file using load_ics_events from ics_edit.py.
     6. For each event:
         - Adjust timezones based on Google Calendar settings.
-        - Extract location and clean event description.
-        - Assign a color based on the event type (Lecture, Exam, Seminar, etc.).
+        - Extract location using extract_location from ics_edit.py and clean event description using clean_description from ics_edit.py.
+        - Assign a color based on the event type (Lecture, Exam, Seminar, etc.) using determine_color.
         - Import the event into the selected Google Calendar.
     7. If token is expired or revoked:
         - Delete the corrupted token file.
@@ -260,59 +201,3 @@ def ics_import(
         else:
             print("❌ Failed to refresh credentials even after retrying.")
             raise e
-
-
-def ics_edit(
-    input_path: str = "Plany.ics",
-    output_path: str = "Plany_edited.ics",
-    timezone_str: str = "Europe/Warsaw",
-):
-    """
-    Edits the events in an ICS file by extracting relevant details and adjusting the time zone.
-
-    Parameters:
-    - input_path (str): Path to the input ICS file.
-    - output_path (str): Path to the output edited ICS file.
-    - timezone_str (str): The time zone to apply to event times.
-
-    Algorithm:
-    1. Loads events from the ICS file.
-    2. Extracts and cleans event details (location, description).
-    3. Localizes the event start and end times to the specified time zone.
-    4. Writes the updated events to a new ICS file.
-
-    The function will ensure that the output directory exists and the updated calendar is written to the specified path.
-    """
-    events = load_ics_events(input_path)
-    new_cal = ICSCalendar()
-    tz = timezone(timezone_str)
-
-    for e in events:
-        if "odwołane" in (e.description or ""):
-            continue
-        location = extract_location(e.description)
-        new_summary = f"{location} {e.name}".strip()
-        cleaned_desc = clean_description(e.description)
-
-        # Localize start and end times to the specified timezone
-        start = tz.localize(e.begin.datetime.replace(tzinfo=None))
-        end = tz.localize(e.end.datetime.replace(tzinfo=None))
-
-        # Add event to new calendar
-        new_event = ICSEvent(
-            name=new_summary,
-            begin=start,
-            end=end,
-            description=cleaned_desc,
-        )
-        new_cal.events.add(new_event)
-
-    # Ensure the directory exists for the output file
-    output_dir = os.path.dirname(output_path)
-    if output_dir and not os.path.exists(output_dir):
-        os.makedirs(output_dir, exist_ok=True)
-
-    # Write the updated calendar to the output file
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.writelines(new_cal.serialize_iter())
-    print(f"✅ ICS editing completed successfully!\n📁 Output saved to: {output_path}")
