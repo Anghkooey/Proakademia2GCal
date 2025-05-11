@@ -40,7 +40,7 @@
 **Виберіть спосіб імпорту:**
 
 - **Розробникам:** Використовуйте безпосередньо **скрипт Python** 🐍 для повного контролю.
-- **Усім користувачам:** Завантажте **готові до використання програми** 🚀 для [Windows](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 та [Linux](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
+- **Усім користувачам:** Завантажте **готові до використання програми** 🚀 для [**Windows**](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 та [**Linux**](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
 
 ## 🚀 Швидкий перегляд
 
@@ -77,7 +77,7 @@
 
 ### 💻 Швидка установка та запуск
 
-Хочете швидко та легко? Використовуйте скомпільовані виконувані файли з [Релізи](https://github.com/Anghkooey/Proakademia2GCal/releases)!
+Хочете швидко та легко? Використовуйте скомпільовані виконувані файли з [**Релізи**](https://github.com/Anghkooey/Proakademia2GCal/releases)!
 
 - **Windows:** Завантажте `ics_edit_windows.exe` і вперед!
 
@@ -166,5 +166,7 @@ ics_edit()
 ## 📚 Документація
 
 **Офіційна документація для бібліотеки `gcsa`: [gcsa Documentation](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)**
+
+---
 
 ### <a target="_blank" href="https://icons8.com/icon/Xm1BwlEApHW6/google-calendar">Google Calendar</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>

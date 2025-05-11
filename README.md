@@ -40,7 +40,7 @@ This tool streamlines your schedule data, typically exported as an **ICS** file 
 **Choose your import method:**
 
 - **Developers:** Use the **Python script** directly 🐍 for full control.
-- **All Users:** Download the **ready-to-use programs** 🚀 for [Windows](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 and [Linux](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
+- **All Users:** Download the **ready-to-use programs** 🚀 for [**Windows**](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 and [**Linux**](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
 
 ## 🚀 Quick Preview
 
@@ -77,7 +77,7 @@ See the magic happen! ✨ This animation shows how the script imports your ICS s
 
 ### 💻 Quick Install & Run
 
-Want it fast and easy? Use the compiled executables from [Releases](https://github.com/Anghkooey/Proakademia2GCal/releases)!
+Want it fast and easy? Use the compiled executables from [**Releases**](https://github.com/Anghkooey/Proakademia2GCal/releases)!
 
 - **Windows:** Grab `ics_edit_windows.exe` and go!
 
@@ -168,5 +168,7 @@ This function helps clean up and adjust event times.
 ## 📚 Documentation
 
 **For detailed information about the `gcsa` library, visit: [gcsa Documentation](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)**
+
+---
 
 ### <a target="_blank" href="https://icons8.com/icon/Xm1BwlEApHW6/google-calendar">Google Calendar</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>

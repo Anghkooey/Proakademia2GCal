@@ -23,7 +23,7 @@
   <a href="ua.md"><img src="flags/ua_icon.svg" width="80" alt="Ukraiński"></a>
 </p>
 
-**Masz dość problemów z dodawaniem planu zajęć z [Uniwersytetu Andrzeja Frycza Modrzewskiego (UAFM)]((https://uafm.edu.pl/)) do Kalendarza Google?** 😩 Jako student _UAFM_, stworzyłem **Proakademia2GCal**, aby uprościć _edycję_ i _importowanie_ Twojego harmonogramu [**Proakademia**](https://www.dlauczelni.apr.pl/) do [**Kalendarza Google 🗓️**](https://calendar.google.com/), z żywymi kolorami i lepszą organizacją.
+**Masz dość problemów z dodawaniem planu zajęć z [Uniwersytetu Andrzeja Frycza Modrzewskiego (UAFM)](<(https://uafm.edu.pl/)>) do Kalendarza Google?** 😩 Jako student _UAFM_, stworzyłem **Proakademia2GCal**, aby uprościć _edycję_ i _importowanie_ Twojego harmonogramu [**Proakademia**](https://www.dlauczelni.apr.pl/) do [**Kalendarza Google 🗓️**](https://calendar.google.com/), z żywymi kolorami i lepszą organizacją.
 
 To narzędzie usprawnia pracę z Twoimi danymi harmonogramu, zwykle eksportowanymi jako plik **ICS** z modułu "Dziekanat" systemu [**Proakademia**](https://www.dlauczelni.apr.pl/) (używanego przez [**UAFM**](https://uafm.edu.pl/) i inne uczelnie oparte na [**APR**](https://www.apr.pl/) 🚀). Studenci _UAFM_ mogą łatwo pobrać swój plik ICS z **[Dziekanatu](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)** 🔗.
 
@@ -40,7 +40,7 @@ To narzędzie usprawnia pracę z Twoimi danymi harmonogramu, zwykle eksportowany
 **Wybierz metodę importu:**
 
 - **Programiści:** Użyj bezpośrednio **skryptu Python** 🐍, aby uzyskać pełną kontrolę.
-- **Wszyscy użytkownicy:** Pobierz **gotowe do użycia programy** 🚀 dla [Windows](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 i [Linux](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
+- **Wszyscy użytkownicy:** Pobierz **gotowe do użycia programy** 🚀 dla [**Windows**](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 i [**Linux**](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
 
 ## 🚀 Szybki podgląd
 
@@ -77,7 +77,7 @@ To narzędzie usprawnia pracę z Twoimi danymi harmonogramu, zwykle eksportowany
 
 ### 💻 Szybka instalacja i uruchomienie
 
-Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](https://github.com/Anghkooey/Proakademia2GCal/releases)!
+Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [**Wydania**](https://github.com/Anghkooey/Proakademia2GCal/releases)!
 
 - **Windows:** Pobierz `ics_edit_windows.exe` i gotowe!
 
@@ -164,5 +164,7 @@ ics_edit()
 ## 📚 Dokumentacja
 
 **Zajrzyj do dokumentacji biblioteki `gcsa`: [gcsa docs](https://google-calendar-simple-api.readthedocs.io/en/latest/index.html)**
+
+---
 
 ### <a target="_blank" href="https://icons8.com/icon/Xm1BwlEApHW6/google-calendar">Google Calendar</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
