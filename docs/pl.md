@@ -1,43 +1,46 @@
-# **Importer ICS do Google Calendar** 📅✨
+# **Proakademia2GCal**: Usprawnij swój kalendarz [**Proakademia**](https://www.dlauczelni.apr.pl/) 📅✨
 
 <p align="center">
-  <a href="https://github.com/Anghkooey/uafm_ical/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/Anghkooey/uafm_ical?style=for-the-badge" alt="License Badge">
+  <a href="https://github.com/Anghkooey/Proakademia2GCal/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Anghkooey/Proakademia2GCal?style=for-the-badge" alt="Odznaka licencji">
   </a>
   <a href="https://www.python.org/">
-    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Odznaka Pythona">
   </a>
-  <a href="https://github.com/Anghkooey/uafm_ical/commits/main">
-    <img src="https://img.shields.io/github/last-commit/Anghkooey/uafm_ical?style=for-the-badge" alt="Last Commit Badge">
+  <a href="https://github.com/Anghkooey/Proakademia2GCal/commits/main">
+    <img src="https://img.shields.io/github/last-commit/Anghkooey/Proakademia2GCal?style=for-the-badge" alt="Odznaka ostatniego commitu">
   </a>
-  <a href="https://github.com/Anghkooey/uafm_ical/releases">
-    <img src="https://img.shields.io/github/release/Anghkooey/uafm_ical?style=for-the-badge" alt="Latest Release Badge">
+  <a href="https://github.com/Anghkooey/Proakademia2GCal/releases">
+    <img src="https://img.shields.io/github/release/Anghkooey/Proakademia2GCal?style=for-the-badge" alt="Odznaka ostatniego wydania">
   </a>
 </p>
 
 <p align="center">
-  <a href="pl.md"><img src="flags/pl_icon.svg" width="70" alt="Polski"></a>
+  <a href="pl.md"><img src="flags/pl_icon.svg" width="80" alt="Polski"></a>
   <a>  </a>
-  <a href="../README.md"><img src="flags/en_icon.svg" width="70" alt="Angielski"></a>
+  <a href="../README.md"><img src="flags/en_icon.svg" width="80" alt="Angielski"></a>
   <a>  </a>
-  <a href="ua.md"><img src="flags/ua_icon.svg" width="70" alt="Ukraiński"></a>
+  <a href="ua.md"><img src="flags/ua_icon.svg" width="80" alt="Ukraiński"></a>
 </p>
 
-**Witamy w ICS Importer!** **Ten skrypt w Pythonie jest zaprojektowany do importowania wydarzeń z pliku** **ICS** **do Twojego** **Google Calendar**. **Jest szczególnie dostosowany do importowania harmonogramów z** [**Uniwersytetu Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **Plik ICS możesz pobrać z** **[tego linku](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**.
+**Masz dość problemów z dodawaniem planu zajęć z [Uniwersytetu Andrzeja Frycza Modrzewskiego (UAFM)]((https://uafm.edu.pl/)) do Kalendarza Google?** 😩 Jako student _UAFM_, stworzyłem **Proakademia2GCal**, aby uprościć _edycję_ i _importowanie_ Twojego harmonogramu [**Proakademia**](https://www.dlauczelni.apr.pl/) do [**Kalendarza Google 🗓️**](https://calendar.google.com/), z żywymi kolorami i lepszą organizacją.
 
-**✔️ Tworzy kalendarz, jeśli go nie masz  
-✔️ Usuwa wydarzenia starsze niż 30 dni  
-✔️ Czyści i formatuje plan zajęć profesjonalnie**
+To narzędzie usprawnia pracę z Twoimi danymi harmonogramu, zwykle eksportowanymi jako plik **ICS** z modułu "Dziekanat" systemu [**Proakademia**](https://www.dlauczelni.apr.pl/) (używanego przez [**UAFM**](https://uafm.edu.pl/) i inne uczelnie oparte na [**APR**](https://www.apr.pl/) 🚀). Studenci _UAFM_ mogą łatwo pobrać swój plik ICS z **[Dziekanatu](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)** 🔗.
 
-## ✨ Kluczowe funkcje
+**Proakademia2GCal umożliwia:**
 
-- **Automatyczny import:** Harmonogram z pliku ICS trafia prosto do Twojego Kalendarza Google.
-- **Uniwersalna kompatybilność:** Obsługuje pliki ICS z różnych systemów akademickich (APR, Mobilny Student, itd.).
-- **Nowy kalendarz:** Jeśli nie podasz ID, stworzy nowy o nazwie "Study".
-- **Czysty kalendarz:** Przed importem usuwa stare wydarzenia.
-- **Koloryzacja wydarzeń:** Rozróżnia typy zajęć kolorami (Egzaminy ❤️, Wykłady 🖤 itd.).
-- **Obsługa stref czasowych:** Wszystko zsynchronizowane ze strefą czasową Twojego kalendarza.
-- **Skompilowane wersje:** Aplikacja jest również dostępna jako skompilowane pliki wykonywalne dla systemów Windows i Linux, co upraszcza użycie bez instalacji Pythona. Zobacz stronę [Wydania](https://github.com/Anghkooey/uafm_ical/releases).
+- ✔️ **Przygotowanie i ulepszenie pliku ICS** do dokładnego importu: dostosowanie stref czasowych i oczyszczenie danych.
+
+- ✔️ **Importowanie harmonogramu do dedykowanego kalendarza "Studia" w Kalendarzu Google** 🧙‍♂️ (z opcją automatycznego tworzenia).
+
+- ✔️ **Utrzymanie czystego kalendarza** 🧼 dzięki automatycznemu usuwaniu wydarzeń starszych niż 30 dni.
+
+- ✔️ **Intuicyjne wizualizowanie harmonogramu** 🎨 z przejrzystym formatowaniem i _oznaczonymi kolorami typami zajęć_ (np. wykłady 🖤, laboratoria 💙, egzaminy ❤️).
+
+**Wybierz metodę importu:**
+
+- **Programiści:** Użyj bezpośrednio **skryptu Python** 🐍, aby uzyskać pełną kontrolę.
+- **Wszyscy użytkownicy:** Pobierz **gotowe do użycia programy** 🚀 dla [Windows](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 i [Linux](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
 
 ## 🚀 Szybki podgląd
 
@@ -74,7 +77,7 @@
 
 ### 💻 Szybka instalacja i uruchomienie
 
-Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](https://github.com/Anghkooey/uafm_ical/releases)!
+Chcesz szybko i łatwo? Użyj skompilowanych plików wykonywalnych z [Wydania](https://github.com/Anghkooey/Proakademia2GCal/releases)!
 
 - **Windows:** Pobierz `ics_edit_windows.exe` i gotowe!
 
@@ -116,15 +119,16 @@ Aby skrypt mógł używać Kalendarza Google, wykonaj następujące kroki:
 ### 🗓️ Przykład 1: Import do konkretnego kalendarza
 
 ```python
-from main import ics_import
+from src.main import ics_import
 
 calendar_id = "YOUR_CALENDAR_ID"  # Zastąp rzeczywistym identyfikatorem kalendarza
+ics_import(calendar_id)
 ```
 
 ### 🌐 Przykład 2: Utwórz nowy kalendarz i zaimportuj
 
 ```python
-from main import ics_import
+from src.main import ics_import
 
 ics_import()
 ```

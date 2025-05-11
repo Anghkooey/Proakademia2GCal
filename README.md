@@ -1,43 +1,46 @@
-# **ICS Importer for Google Calendar** 📅✨
+# **Proakademia2GCal**: Supercharge Your [**Proakademia**](https://www.dlauczelni.apr.pl/) Calendar 📅✨
 
 <p align="center">
-  <a href="https://github.com/Anghkooey/uafm_ical/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/Anghkooey/uafm_ical?style=for-the-badge" alt="License Badge">
+  <a href="https://github.com/Anghkooey/Proakademia2GCal/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Anghkooey/Proakademia2GCal?style=for-the-badge" alt="License Badge">
   </a>
   <a href="https://www.python.org/">
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python Badge">
   </a>
-  <a href="https://github.com/Anghkooey/uafm_ical/commits/main">
-    <img src="https://img.shields.io/github/last-commit/Anghkooey/uafm_ical?style=for-the-badge" alt="Last Commit Badge">
+  <a href="https://github.com/Anghkooey/Proakademia2GCal/commits/main">
+    <img src="https://img.shields.io/github/last-commit/Anghkooey/Proakademia2GCal?style=for-the-badge" alt="Last Commit Badge">
   </a>
-  <a href="https://github.com/Anghkooey/uafm_ical/releases">
-    <img src="https://img.shields.io/github/release/Anghkooey/uafm_ical?style=for-the-badge" alt="Latest Release Badge">
+  <a href="https://github.com/Anghkooey/Proakademia2GCal/releases">
+    <img src="https://img.shields.io/github/release/Anghkooey/Proakademia2GCal?style=for-the-badge" alt="Latest Release Badge">
   </a>
 </p>
 
 <p align="center">
-  <a href="docs/pl.md"><img src="docs/flags/pl_icon.svg" width="70" alt="Polish"></a>
+  <a href="docs/pl.md"><img src="docs/flags/pl_icon.svg" width="80" alt="Polish"></a>
   <a>  </a>
-  <a href="README.md"><img src="docs/flags/en_icon.svg" width="70" alt="English"></a>
+  <a href="README.md"><img src="docs/flags/en_icon.svg" width="80" alt="English"></a>
   <a>  </a>
-  <a href="docs/ua.md"><img src="docs/flags/ua_icon.svg" width="70" alt="Ukrainian"></a>
+  <a href="docs/ua.md"><img src="docs/flags/ua_icon.svg" width="80" alt="Ukrainian"></a>
 </p>
 
-**Welcome to the ICS Importer!** **This Python script is designed to import events from an** **ICS** **file into your** **Google Calendar**. **It’s specifically tailored for importing schedules from** [**Uniwersytet Andrzeja Frycza Modrzewskiego**](https://uafm.edu.pl/). **You can get the ICS file from** **[this link](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)**.
+**Tired of struggling with your [Uniwersytet Andrzeja Frycza Modrzewskiego (UAFM)](<(https://uafm.edu.pl/)>) class schedule in Google Calendar?** 😩 As a fellow _UAFM_ student, I built **Proakademia2GCal** to simplify the _editing_ and _importing_ of your [**Proakademia**](https://www.dlauczelni.apr.pl/) timetable into [**Google Calendar 🗓️**](https://calendar.google.com/), with vibrant color-coding and improved organization.
 
-**✔️ Auto-creates a calendar if you don’t have one  
-✔️ Deletes old entries (older than 30 days)  
-✔️ Cleans up and formats your schedule like a pro**
+This tool streamlines your schedule data, typically exported as an **ICS** file from the "Dziekanat" (Dean's Office) module of the [**Proakademia**](https://www.dlauczelni.apr.pl/) system (used by [**UAFM**](https://uafm.edu.pl/) and other universities powered by [**APR**](https://www.apr.pl/) 🚀). _UAFM_ students can easily grab their ICS file from the **[Dziekanat](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)** 🔗.
 
-## ✨ Key Features
+**Proakademia2GCal lets you:**
 
-- **Effortless Import:** Automatically add your schedule to Google Calendar.
-- **Universal Compatibility:** Works with ICS files from various university systems (e.g., APR System, Mobilny Student).
-- **New Calendar Option:** Creates a new "Study" calendar if you don't specify one.
-- **Clean Calendar:** Removes events older than 30 days before importing.
-- **Color-Coded Events:** Visually distinguish event types (Exams ❤️, Lectures 🖤, etc.).
-- **Time Zone Handling:** Uses your Google Calendar's time zone for accurate event times.
-- **Compiled Versions:** The application is also available as compiled executables for Windows and Linux, simplifying usage without Python installation. See the [Releases](https://github.com/Anghkooey/uafm_ical/releases) page.
+- ✔️ **Prepare and enhance your ICS file** for accurate import: adjust time zones and clean up data.
+
+- ✔️ **Import your schedule into a dedicated "Study" calendar in Google Calendar** 🧙‍♂️ (auto-creation available).
+
+- ✔️ **Maintain a clean calendar** 🧼 with automatic removal of events older than 30 days.
+
+- ✔️ **Visualize your timetable intuitively** 🎨 with clear formatting and _color-coded class types_ (e.g., lectures 🖤, labs 💙, exams ❤️).
+
+**Choose your import method:**
+
+- **Developers:** Use the **Python script** directly 🐍 for full control.
+- **All Users:** Download the **ready-to-use programs** 🚀 for [Windows](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 and [Linux](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
 
 ## 🚀 Quick Preview
 
@@ -74,7 +77,7 @@ See the magic happen! ✨ This animation shows how the script imports your ICS s
 
 ### 💻 Quick Install & Run
 
-Want it fast and easy? Use the compiled executables from [Releases](https://github.com/Anghkooey/uafm_ical/releases)!
+Want it fast and easy? Use the compiled executables from [Releases](https://github.com/Anghkooey/Proakademia2GCal/releases)!
 
 - **Windows:** Grab `ics_edit_windows.exe` and go!
 
