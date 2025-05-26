@@ -1,3 +1,5 @@
 gcsa
 ics
 pytz
+oauthlib
+httplib2

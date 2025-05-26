@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timedelta
+from re import sub
 from typing import Optional
 
 from gcsa.calendar import Calendar as GCSACalendar
@@ -9,8 +10,12 @@ from google.auth.exceptions import RefreshError
 from pytz import timezone
 from tqdm import tqdm
 
-# Import necessary functions and variables from ics_edit.py
-from ics_edit import extract_location, clean_description, load_ics_events, ics_edit  # noqa: F401
+from ics_edit import (  # noqa: F401
+    clean_description,
+    extract_location,
+    ics_edit,
+    load_ics_events,
+)
 
 # Color mapping for calendar events based on descriptions
 COLORS = {
@@ -44,11 +49,11 @@ def determine_color(desc: str) -> str:
     3. Events with specific group types (e.g., "Wyk", "Cw", "Lek", "Lab") are assigned corresponding colors.
     4. Default color is yellow if no specific type is detected.
     """
-    if all(x not in desc for x in ("Uwagi: \n", "obieralny", "Online")):
+    if not (sub(r"(obieralny|Online)", "", desc)).strip().endswith(":"):
         return COLORS["Tomato"]  # Exam
     elif any(x in desc for x in ("Sala: \n", "Online")):
         return COLORS["Grape"]  # Online or cancelled
-    elif "Grupy: Wyk" in desc:
+    elif any(k in desc for k in ("Grupy: Wyk", "Grupy: Kon")):
         return COLORS["Graphite"]
     elif any(k in desc for k in ("Grupy: Lab", "inf")):
         return COLORS["Peacock"]
