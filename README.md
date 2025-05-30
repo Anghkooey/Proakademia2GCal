@@ -93,26 +93,65 @@ This is a general guide on how to import an ICS file into Google Calendar.
 
 ![Manual ICS Import](docs/preview/manual_import.gif)
 
-## **Installation** 🛠️
+## 🛠️ Installation & First-Time Setup
 
-1. **Prerequisites:** Make sure you have Python 3.x installed.
-2. **Install Dependencies:**
+Getting started is easy — just follow these steps to supercharge your schedule with a few commands! ⚡
+
+### 1. 💾 Clone the Repository
+
+First, grab the project from GitHub:
 
 ```bash
-pip install gcsa ics pytz
+git clone https://github.com/Anghkooey/Proakademia2GCal
 ```
+
+### 2. 📦 Install Required Libraries
+
+Before launching the script, make sure you have all dependencies:
+
+```bash
+pip install gcsa ics pytz oauthlib httplib2
+```
+
+### 3. 🚪 Enter the Source Directory
+
+All the Python magic happens inside the `src/` folder. Navigate there:
+
+```bash
+cd Proakademia2GCal/src
+```
+
+Your environment is now ready to sync your academic calendar like a pro! ✅
 
 ## 🔑 Setup Google API Credentials
 
-Follow these steps to authorize the script to access your Google Calendar:
+This step allows the script to connect to your Google Calendar securely via OAuth2.0 🔐
 
-1. **Create a Google Cloud Platform (GCP) project:** [Guide](https://developers.google.com/workspace/guides/create-project)
-   - **Important:** Enable the **Google Calendar API** for your project.
-2. **Configure the OAuth consent screen:** [Guide](https://developers.google.com/workspace/guides/configure-oauth-consent)
-3. **Create an OAuth client ID credential:** [Guide](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id) and download `credentials.json`.
-4. **Store the credentials:** Place the downloaded `credentials.json` file in the `~/.credentials/` directory.
+### Follow These Steps:
 
-> **Note:** This [quickstart guide](https://developers.google.com/workspace/calendar/api/quickstart/python) might be helpful.
+1. 🎛️ **Create a Google Cloud Platform (GCP) Project:**
+   👉 [Step-by-step guide](https://developers.google.com/workspace/guides/create-project)
+   ☑️ Make sure to enable the **Google Calendar API** in your project.
+
+2. 🧾 **Configure the OAuth Consent Screen:**
+   📘 [Follow this guide](https://developers.google.com/workspace/guides/configure-oauth-consent)
+   Let Google know who’s asking for access (you).
+
+3. 🔑 **Create OAuth 2.0 Client ID Credentials:**
+   🛠️ Use this [official guide](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
+   Then, download the generated `credentials.json` file.
+
+4. 🗂️ **Place Your Credentials Correctly:**
+   Move or copy the `credentials.json` to the following directory in your home folder:
+
+   ```bash
+   ~/.credentials/credentials.json
+   ```
+
+   > 💡 If the `.credentials/` directory doesn't exist — just create it!
+
+📚 Need a visual walkthrough?
+Google provides a great [Python Quickstart](https://developers.google.com/workspace/calendar/api/quickstart/python) that walks you through the steps.
 
 ## 🎉 Usage
 

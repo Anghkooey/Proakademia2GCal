@@ -93,33 +93,74 @@ To jest ogólny przewodnik po tym, jak importować plik ICS do Kalendarza Google
 
 ![Ręczny import ICS](preview/manual_import.gif)
 
-## 🛠️ Instalacja
+## 🛠️ Instalacja i Pierwsze Uruchomienie
 
-1. **Wymagania:** Python 3.x
-2. **Instalacja zależności:**
+Zaczynamy błyskawicznie — wykonaj te kroki, aby błyskotliwie zsynchronizować swój plan zajęć z Google Calendar! ⚡
+
+### 1. 💾 Sklonuj Repozytorium
+
+Najpierw pobierz projekt z GitHuba:
 
 ```bash
-pip install gcsa ics pytz
+git clone https://github.com/Anghkooey/Proakademia2GCal
 ```
 
-## 🔑 Konfiguracja Google API
+### 2. 📦 Zainstaluj Wymagane Biblioteki
 
-Aby skrypt mógł używać Kalendarza Google, wykonaj następujące kroki:
+Zanim uruchomisz skrypt, upewnij się, że masz zainstalowane wszystkie zależności:
 
-1. **Utwórz projekt GCP:** [Instrukcja](https://developers.google.com/workspace/guides/create-project)
-   - Włącz **Google Calendar API**
-2. **Skonfiguruj ekran zgody OAuth:** [Instrukcja](https://developers.google.com/workspace/guides/configure-oauth-consent)
-3. **Utwórz dane logowania OAuth:** [Instrukcja](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
-4. **Umieść plik `credentials.json` w katalogu `~/.credentials/`**
+```bash
+pip install gcsa ics pytz oauthlib httplib2
+```
 
-> Pomocna może być [szybka konfiguracja](https://developers.google.com/workspace/calendar/api/quickstart/python)
+### 3. 🚪 Wejdź do Folderu Źródłowego
+
+Cała Pythonowa magia dzieje się w folderze `src`. Przejdź tam:
+
+```bash
+cd Proakademia2GCal/src
+```
+
+Twoje środowisko jest już gotowe, by jak profesjonalista zsynchronizować kalendarz akademicki! ✅
+
+---
+
+## 🔑 Konfiguracja Dostępu do Google Calendar (API)
+
+Ten etap umożliwia bezpieczne połączenie skryptu z Twoim Google Kalendarzem przez OAuth2.0 🔐
+
+### Wykonaj Kolejne Kroki:
+
+1. 🎛️ **Utwórz Projekt w Google Cloud Platform (GCP):**
+   👉 [Przewodnik krok po kroku](https://developers.google.com/workspace/guides/create-project)
+   ☑️ Koniecznie włącz **Google Calendar API** w ustawieniach projektu.
+
+2. 🧾 **Skonfiguruj ekran zgody OAuth:**
+   📘 [Instrukcja konfiguracji](https://developers.google.com/workspace/guides/configure-oauth-consent)
+   Dzięki temu Google będzie wiedziało, kto prosi o dostęp (czyli Ty).
+
+3. 🔑 **Utwórz dane logowania OAuth 2.0 (Client ID):**
+   🛠️ Skorzystaj z tego [oficjalnego poradnika](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
+   Następnie pobierz plik `credentials.json`.
+
+4. 🗂️ **Umieść dane logowania w odpowiednim miejscu:**
+   Przenieś lub skopiuj `credentials.json` do katalogu:
+
+   ```bash
+   ~/.credentials/credentials.json
+   ```
+
+   > 💡 Jeśli katalog `.credentials/` nie istnieje — po prostu go utwórz!
+
+📚 Potrzebujesz wizualnego przewodnika?
+Google przygotowało świetny [Python Quickstart](https://developers.google.com/workspace/calendar/api/quickstart/python), który przeprowadzi Cię przez cały proces.
 
 ## 🎉 Użycie
 
 ### 🗓️ Przykład 1: Import do konkretnego kalendarza
 
 ```python
-from src.main import ics_import
+from main import ics_import
 
 calendar_id = "YOUR_CALENDAR_ID"  # Zastąp rzeczywistym identyfikatorem kalendarza
 ics_import(calendar_id)
@@ -128,7 +169,7 @@ ics_import(calendar_id)
 ### 🌐 Przykład 2: Utwórz nowy kalendarz i zaimportuj
 
 ```python
-from src.main import ics_import
+from main import ics_import
 
 ics_import()
 ```
