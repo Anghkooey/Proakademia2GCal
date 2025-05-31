@@ -16,6 +16,7 @@
 </p>
 
 <p align="center">
+<img src="https://img.shields.io/badge/🌏%20Wybierz%20język%20klikając%20flagę-darkblue?style=for-the-badge" alt="Zmień język"><br>
   <a href="pl.md"><img src="flags/pl_icon.svg" width="80" alt="Polski"></a>
   <a>  </a>
   <a href="../README.md"><img src="flags/en_icon.svg" width="80" alt="Angielski"></a>
@@ -23,24 +24,30 @@
   <a href="ua.md"><img src="flags/ua_icon.svg" width="80" alt="Ukraiński"></a>
 </p>
 
-**Masz dość problemów z dodawaniem planu zajęć z [Uniwersytetu Andrzeja Frycza Modrzewskiego (UAFM)](<(https://uafm.edu.pl/)>) do Kalendarza Google?** 😩 Jako student _UAFM_, stworzyłem **Proakademia2GCal**, aby uprościć _edycję_ i _importowanie_ Twojego harmonogramu [**Proakademia**](https://www.dlauczelni.apr.pl/) do [**Kalendarza Google 🗓️**](https://calendar.google.com/), z żywymi kolorami i lepszą organizacją.
+---
 
-To narzędzie usprawnia pracę z Twoimi danymi harmonogramu, zwykle eksportowanymi jako plik **ICS** z modułu "Dziekanat" systemu [**Proakademia**](https://www.dlauczelni.apr.pl/) (używanego przez [**UAFM**](https://uafm.edu.pl/) i inne uczelnie oparte na [**APR**](https://www.apr.pl/) 🚀). Studenci _UAFM_ mogą łatwo pobrać swój plik ICS z **[Dziekanatu](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)** 🔗.
+**🚀 Masz dość wolnych aplikacji i nieczytelnych planów zajęć? Poznaj Proakademia2GCal!**
 
-**Proakademia2GCal umożliwia:**
+Stworzony przez **[studenta pierwszego roku UAFM](https://uafm.edu.pl/)** 🎓, ten projekt pozwala łatwo i szybko zaimportować Twój plan z **[Proakademia](https://www.dlauczelni.apr.pl/)** do **[Google Kalendarza 🗓️](https://calendar.google.com/)** — z kolorami i pełną organizacją!
 
-- ✔️ **Przygotowanie i ulepszenie pliku ICS** do dokładnego importu: dostosowanie stref czasowych i oczyszczenie danych.
+Dlaczego warto korzystać z **Google Kalendarza**?
 
-- ✔️ **Importowanie harmonogramu do dedykowanego kalendarza "Studia" w Kalendarzu Google** 🧙‍♂️ (z opcją automatycznego tworzenia).
+- ⚡ **Błyskawiczny dostęp z każdego urządzenia** — otwórz go w przeglądarce lub w oficjalnej aplikacji na **iOS** i **Android**
+- 🌍 **Pełna kompatybilność** — nie potrzebujesz żadnych dodatkowych programów ani instalacji, by mieć plan zawsze pod ręką
+- 🎨 **Kolorowe oznaczenia wydarzeń:** wykłady 🖤, laboratoria 💙, egzaminy ❤️ — wszystko czytelne i przejrzyste
 
-- ✔️ **Utrzymanie czystego kalendarza** 🧼 dzięki automatycznemu usuwaniu wydarzeń starszych niż 30 dni.
+**Proakademia2GCal pozwala:**
 
-- ✔️ **Intuicyjne wizualizowanie harmonogramu** 🎨 z przejrzystym formatowaniem i _oznaczonymi kolorami typami zajęć_ (np. wykłady 🖤, laboratoria 💙, egzaminy ❤️).
+- 🧹 **Wyczyścić i zoptymalizować plik ICS**, by import przebiegał bezproblemowo
+- 🗓️ **Automatycznie utworzyć dedykowany kalendarz „Studia”** na Twoje zajęcia
+- 🧼 **Utrzymać porządek** usuwając stare wydarzenia
 
-**Wybierz metodę importu:**
+**Jak zacząć?**
 
-- **Programiści:** Użyj bezpośrednio **skryptu Python** 🐍, aby uzyskać pełną kontrolę.
-- **Wszyscy użytkownicy:** Pobierz **gotowe do użycia programy** 🚀 dla [**Windows**](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 i [**Linux**](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
+- 🐍 Skorzystaj ze skryptu w Pythonie dla pełnej kontroli
+- 🚀 Lub pobierz gotowe aplikacje dla **[Windows](https://github.com/Anghkooey/Proakademia2GCal/releases)** 💻 i **[Linux](https://github.com/Anghkooey/Proakademia2GCal/releases)** 🐧
+
+**Uprość swoje studia — planuj sprytniej!**
 
 ## 🚀 Szybki podgląd
 

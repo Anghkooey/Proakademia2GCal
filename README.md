@@ -16,6 +16,7 @@
 </p>
 
 <p align="center">
+<img src="https://img.shields.io/badge/🌏%20Click%20a%20flag%20to%20switch%20language-darkblue?style=for-the-badge" alt="Language switch hint"><br>
   <a href="docs/pl.md"><img src="docs/flags/pl_icon.svg" width="80" alt="Polish"></a>
   <a>  </a>
   <a href="README.md"><img src="docs/flags/en_icon.svg" width="80" alt="English"></a>
@@ -23,24 +24,30 @@
   <a href="docs/ua.md"><img src="docs/flags/ua_icon.svg" width="80" alt="Ukrainian"></a>
 </p>
 
-**Tired of struggling with your [Uniwersytet Andrzeja Frycza Modrzewskiego (UAFM)](<(https://uafm.edu.pl/)>) class schedule in Google Calendar?** 😩 As a fellow _UAFM_ student, I built **Proakademia2GCal** to simplify the _editing_ and _importing_ of your [**Proakademia**](https://www.dlauczelni.apr.pl/) timetable into [**Google Calendar 🗓️**](https://calendar.google.com/), with vibrant color-coding and improved organization.
+---
 
-This tool streamlines your schedule data, typically exported as an **ICS** file from the "Dziekanat" (Dean's Office) module of the [**Proakademia**](https://www.dlauczelni.apr.pl/) system (used by [**UAFM**](https://uafm.edu.pl/) and other universities powered by [**APR**](https://www.apr.pl/) 🚀). _UAFM_ students can easily grab their ICS file from the **[Dziekanat](https://dziekanat.uafm.edu.pl/Plany/PlanyGrup)** 🔗.
+**🚀 Tired of slow apps and messy schedules? Meet Proakademia2GCal!**
+
+Created by a **[first-year student at UAFM](https://uafm.edu.pl/)** 🎓, this tool imports your **[Proakademia](https://www.dlauczelni.apr.pl/)** schedule straight into **[Google Calendar 🗓️](https://calendar.google.com/)** — fast, simple, and color-coded!
+
+Why choose **Google Calendar**?
+
+- ⚡ **Instant access** from **any device** — open it right in your **web browser** or via the official **mobile app** on **iOS** and **Android**
+- 🌍 **Cross-platform convenience** — no need for extra apps or downloads to check your schedule
+- 🎨 **Vibrant color-coding** for events: lectures 🖤, labs 💙, exams ❤️ — so your calendar is always clear and organized
 
 **Proakademia2GCal lets you:**
 
-- ✔️ **Prepare and enhance your ICS file** for accurate import: adjust time zones and clean up data.
+- 🧹 **Clean and optimize your ICS file** for a smooth, error-free import
+- 🗓️ **Automatically create a dedicated "Study" calendar** for your classes
+- 🧼 **Keep your calendar clutter-free** by removing old events automatically
 
-- ✔️ **Import your schedule into a dedicated "Study" calendar in Google Calendar** 🧙‍♂️ (auto-creation available).
+**Get started:**
 
-- ✔️ **Maintain a clean calendar** 🧼 with automatic removal of events older than 30 days.
+- 🐍 Use the flexible **Python script** for maximum control
+- 🚀 Or download ready-to-run apps for **[Windows](https://github.com/Anghkooey/Proakademia2GCal/releases)** 💻 and **[Linux](https://github.com/Anghkooey/Proakademia2GCal/releases)** 🐧
 
-- ✔️ **Visualize your timetable intuitively** 🎨 with clear formatting and _color-coded class types_ (e.g., lectures 🖤, labs 💙, exams ❤️).
-
-**Choose your import method:**
-
-- **Developers:** Use the **Python script** directly 🐍 for full control.
-- **All Users:** Download the **ready-to-use programs** 🚀 for [**Windows**](https://github.com/Anghkooey/Proakademia2GCal/releases) 💻 and [**Linux**](https://github.com/Anghkooey/Proakademia2GCal/releases) 🐧.
+**Simplify your study life — schedule smarter, not harder!**
 
 ## 🚀 Quick Preview
 
