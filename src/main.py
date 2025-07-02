@@ -18,6 +18,7 @@ from ics_edit import (  # noqa: F401
 )
 
 # Color mapping for calendar events based on descriptions
+# Colors documentation https://google-calendar-simple-api.readthedocs.io/en/latest/colors.html
 COLORS = {
     "Lavender": "1",  # Light Purple
     "Sage": "2",  # Light Green
