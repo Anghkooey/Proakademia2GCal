@@ -6,6 +6,7 @@ from datetime import datetime
 from uuid import uuid4
 from itertools import islice
 from pathlib import Path
+from datetime import datetime, timedelta
 
 from ics import Calendar, Event
 
@@ -273,6 +274,29 @@ def get_input_files(input_paths: list[str]) -> list[Path]:
 
     return unique_files
 
+def remove_old_events(
+    calendar: Calendar,
+    days: int = 7,
+) -> int:
+    """
+    Removes events that ended more than `days` ago.
+
+    Events ending exactly 7 days ago are kept.
+    Returns the number of removed events.
+    """
+    cutoff = datetime.now() - timedelta(days=days)
+
+    old_events = [
+        event
+        for event in calendar.events
+        if event.end.datetime.replace(tzinfo=None) < cutoff
+    ]
+
+    for event in old_events:
+        calendar.events.remove(event)
+
+    return len(old_events)
+
 
 def pcap(
     input_path: str | list[str] = "pc.json",
@@ -301,6 +325,8 @@ def pcap(
 
         print(f"📄 Loaded {len(schedule)} events from {file_path}")
 
+    removed_events = remove_old_events(calendar, days=7)
+    total_events -= removed_events
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -310,7 +336,8 @@ def pcap(
     print(
         "\n✅ PCAP conversion completed successfully!"
         f"\n📁 Input files: {len(files)}"
-        f"\n📅 Total events: {total_events}"
+        f"\n📅 Events remaining: {total_events}"
+        f"\n🗑️ Old events removed: {removed_events}"
         f"\n📁 Output: {output}"
     )
 
