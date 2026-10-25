@@ -5,3 +5,8 @@ __pycache__
 build
 dist
 ics_edit.spec
+src2
+src/t_edit.py
+test/P
+test/orig
+test/__pycache__
