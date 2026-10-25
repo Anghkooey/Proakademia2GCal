@@ -56,7 +56,7 @@ def determine_color(desc: str) -> str:
         return COLORS["Grape"]  # Online or cancelled
     elif any(k in desc for k in ("Grupy: Wyk", "Grupy: Kon")):
         return COLORS["Graphite"]
-    elif any(k in desc for k in ("Grupy: Lab", "inf")):
+    elif any(k in desc for k in ("Grupy: Lab", "inf", "PRACOWNIA INFORMATYCZNA")):
         return COLORS["Peacock"]
     elif any(k in desc for k in ("Grupy: Cw", "Grupy: Lek")):
         return COLORS["Basil"]
