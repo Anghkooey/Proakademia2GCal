@@ -1,45 +1,60 @@
 import argparse
 import json
-import os
 import re
 import sys
 from datetime import datetime
 from uuid import uuid4
+from itertools import islice
+from pathlib import Path
 
 from ics import Calendar, Event
 
-from itertools import islice
-
 
 def load_schedule(path: str) -> list:
-    """Load schedule events from the JSON object on line 13."""
+    """
+    Loads schedule events from a JSON file.
+
+    First attempts to parse the whole file.
+    If that fails, attempts to parse the JSON object on line 13.
+    """
     with open(path, encoding="utf-8") as file:
-        line = next(islice(file, 12, 13), None)
+        content = file.read()
 
-    if line is None:
-        raise ValueError("The file contains fewer than 13 lines.")
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError:
+        lines = content.splitlines()
+        line = next(islice(lines, 12, 13), None)
 
-    data = json.loads(line)
+        if line is None:
+            raise ValueError(
+                f"{path}: the file contains fewer than 13 lines."
+            )
+
+        try:
+            data = json.loads(line)
+        except json.JSONDecodeError as exc:
+            raise ValueError(
+                f"{path}: could not parse JSON or JSON on line 13."
+            ) from exc
 
     try:
         return data["result"]["classScheduleGroups"]
-    except KeyError as exc:
+    except (KeyError, TypeError) as exc:
         raise ValueError(
-            "Invalid JSON format: 'result.classScheduleGroups' was not found."
+            f"{path}: invalid JSON format. "
+            "'result.classScheduleGroups' was not found."
         ) from exc
 
+
 def parse_datetime(date: str, time: str) -> datetime:
-    """
-    Combines date and time from the JSON schedule.
-    """
+    """Combines date and time from the JSON schedule."""
     date_part = date.split("T")[0]
     return datetime.fromisoformat(f"{date_part}T{time}")
 
 
 def polish_weekday(dt: datetime) -> str:
-    """
-    Returns the Polish weekday name.
-    """
+    """Returns the Polish weekday name."""
     weekdays = {
         0: "poniedziałek",
         1: "wtorek",
@@ -49,26 +64,19 @@ def polish_weekday(dt: datetime) -> str:
         5: "sobota",
         6: "niedziela",
     }
-
     return weekdays[dt.weekday()]
 
 
 def format_date(dt: datetime) -> str:
-    """
-    Formats date in the same style as the original ICS file.
-    """
+    """Formats date like the original ICS description."""
     return f"{dt:%Y.%m.%d} {polish_weekday(dt)}"
 
 
 def calculate_duration(start: datetime, end: datetime) -> str:
-    """
-    Calculates duration in hours and minutes.
-    """
+    """Calculates duration in hours and minutes."""
     total_minutes = int((end - start).total_seconds() // 60)
-
     hours = total_minutes // 60
     minutes = total_minutes % 60
-
     return f"{hours}h{minutes:02d}m"
 
 
@@ -97,7 +105,7 @@ def clean_location(location: str) -> str:
             flags=re.IGNORECASE,
         )
 
-        # " - Lab" убираем из Sala
+        # Remove "- Lab" from the room description.
         part = re.sub(
             r"\s*-\s*Lab\b",
             "",
@@ -112,16 +120,16 @@ def clean_location(location: str) -> str:
 
     return ", ".join(locations)
 
+
 def get_group_type(item: dict) -> str:
     location = (item.get("location") or "").lower()
     group = (item.get("group") or "").upper()
     form = (item.get("form") or "").lower()
 
-    # LOCATION — highest priority
+    # Location has the highest priority.
     if "pracownia informatyczna" in location:
         return "Lab"
 
-    # GROUP
     if "LAB" in group:
         return "Lab"
 
@@ -137,25 +145,21 @@ def get_group_type(item: dict) -> str:
     if "KON" in group:
         return "Kon"
 
-    # FORM
     if form in ("lecture", "foreign language course"):
-        return "Lek"
+        return "Wyk"
 
     if "laboratory" in form:
         return "Lab"
 
     return ""
 
+
 def get_form_number(item: dict) -> str:
     """
-    Returns the value for 'Forma zajęć'.
-
-    The JSON does not contain the original numeric value,
-    so an empty string is returned unless 'formNumber'
-    is explicitly present.
+    Returns the original numeric value for 'Forma zajęć',
+    if the JSON explicitly contains it.
     """
     return str(item.get("formNumber", ""))
-
 
 
 def build_description(
@@ -163,24 +167,18 @@ def build_description(
     start: datetime,
     end: datetime,
 ) -> str:
-    """
-    Builds a description similar to the original Proakademia ICS file.
-    """
+    """Builds a description similar to the original Proakademia ICS."""
 
     name = item.get("name", "")
     lecturer = item.get("lecturer", "")
     comments = item.get("comments") or ""
     label_text = item.get("labelText") or ""
 
-    # Clean location before putting it into the ICS file.
-    location = clean_location(
-        item.get("location", "")
-    )
-
+    location = clean_location(item.get("location", ""))
     duration = calculate_duration(start, end)
     group_type = get_group_type(item)
 
-    description = (
+    return (
         f"Data zajęć: {format_date(start)}\n"
         f"Czas od: {start:%H:%M}\n"
         f"Czas do: {end:%H:%M}\n"
@@ -194,33 +192,15 @@ def build_description(
         f"Uwagi: {label_text or comments}"
     )
 
-    return description
 
 def create_event(item: dict) -> Event:
-    """
-    Converts one JSON schedule item into an ICS event.
-    """
+    """Converts one JSON schedule item into an ICS event."""
 
-    start = parse_datetime(
-        item["date"],
-        item["hourFrom"],
-    )
+    start = parse_datetime(item["date"], item["hourFrom"])
+    end = parse_datetime(item["date"], item["hourTo"])
 
-    end = parse_datetime(
-        item["date"],
-        item["hourTo"],
-    )
-
-    name = item.get(
-        "name",
-        "Unknown subject",
-    )
-
-    description = build_description(
-        item,
-        start,
-        end,
-    )
+    name = item.get("name", "Unknown subject")
+    description = build_description(item, start, end)
 
     return Event(
         name=name,
@@ -231,62 +211,125 @@ def create_event(item: dict) -> Event:
     )
 
 
+def natural_sort_key(path: Path):
+    """
+    Sorts numbered files numerically:
+    1.json, 2.json, 3.json, 10.json.
+    """
+    return [
+        int(part) if part.isdigit() else part.lower()
+        for part in re.split(r"(\d+)", path.name)
+    ]
+
+
+def get_input_files(input_paths: list[str]) -> list[Path]:
+    """
+    Resolves input arguments into a list of JSON files.
+
+    Directories: include JSON files and files with numeric names.
+    Explicit files: include the supplied files.
+    """
+    files = []
+
+    for raw_path in input_paths:
+        path = Path(raw_path)
+
+        if not path.exists():
+            raise FileNotFoundError(f"Input path not found: {path}")
+
+        if path.is_dir():
+            candidates = [
+                child
+                for child in path.iterdir()
+                if child.is_file()
+                and (
+                    child.suffix.lower() == ".json"
+                    or child.stem.isdigit()
+                )
+            ]
+
+            candidates.sort(key=natural_sort_key)
+            files.extend(candidates)
+
+        elif path.is_file():
+            files.append(path)
+
+    # Remove duplicate paths while preserving order.
+    unique_files = []
+    seen = set()
+
+    for file in files:
+        resolved = file.resolve()
+
+        if resolved not in seen:
+            seen.add(resolved)
+            unique_files.append(file)
+
+    if not unique_files:
+        raise ValueError(
+            "No input files found. "
+            "Provide a JSON file or a directory containing JSON files."
+        )
+
+    return unique_files
+
+
 def pcap(
-    input_path: str = "pc.json",
+    input_path: str | list[str] = "pc.json",
     output_path: str = "Plany.ics",
 ):
     """
-    Converts pc.json into Plany.ics.
+    Converts one or more JSON schedules into a single ICS calendar.
     """
+    input_paths = (
+        [input_path]
+        if isinstance(input_path, str)
+        else input_path
+    )
 
-    schedule = load_schedule(input_path)
-
+    files = get_input_files(input_paths)
     calendar = Calendar()
 
-    for item in schedule:
-        event = create_event(item)
-        calendar.events.add(event)
+    total_events = 0
 
-    output_dir = os.path.dirname(output_path)
+    for file_path in files:
+        schedule = load_schedule(str(file_path))
 
-    if output_dir:
-        os.makedirs(
-            output_dir,
-            exist_ok=True,
-        )
+        for item in schedule:
+            calendar.events.add(create_event(item))
+            total_events += 1
 
-    with open(
-        output_path,
-        "w",
-        encoding="utf-8",
-    ) as f:
-        f.writelines(
-            calendar.serialize_iter()
-        )
+        print(f"📄 Loaded {len(schedule)} events from {file_path}")
+
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    with output.open("w", encoding="utf-8") as file:
+        file.writelines(calendar.serialize_iter())
 
     print(
-        "✅ PCAP conversion completed successfully!"
-        f"\n📁 Input: {input_path}"
-        f"\n📁 Output: {output_path}"
-        f"\n📅 Events: {len(schedule)}"
+        "\n✅ PCAP conversion completed successfully!"
+        f"\n📁 Input files: {len(files)}"
+        f"\n📅 Total events: {total_events}"
+        f"\n📁 Output: {output}"
     )
 
 
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Converts a Proakademia schedule JSON "
-            "file into an ICS calendar file."
+            "Converts one or more Proakademia JSON schedules "
+            "into a single ICS calendar."
         )
     )
 
     parser.add_argument(
-        "input_path",
-        nargs="?",
-        default="pc.json",
+        "input_paths",
+        nargs="*",
+        default=None,
         help=(
-            "Path to the input JSON file. "
-            "Defaults to 'pc.json'."
+            "Input JSON file(s) or folder(s). "
+            "Defaults to pc.json."
         ),
     )
 
@@ -294,23 +337,19 @@ def main():
         "-o",
         "--output_path",
         default="Plany.ics",
-        help=(
-            "Path to the output ICS file. "
-            "Defaults to 'Plany.ics'."
-        ),
+        help="Output ICS path. Defaults to Plany.ics.",
     )
 
     args = parser.parse_args()
+    input_paths = args.input_paths or ["pc.json"]
 
     try:
         pcap(
-            input_path=args.input_path,
+            input_path=input_paths,
             output_path=args.output_path,
         )
-    except Exception as e:
-        print(
-            f"❌ An error occurred during conversion: {e}"
-        )
+    except Exception as exc:
+        print(f"❌ An error occurred during conversion: {exc}")
         sys.exit(1)
 
 
